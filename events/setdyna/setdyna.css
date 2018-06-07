@@ -1,0 +1,36 @@
+.table {
+  text-align: center;
+}
+.table th {
+  font-weight: 100;
+  font-size: 14px;
+}
+.table .tr {
+  height: 45px;
+}
+.table .more-equal {
+  display: block;
+  width: 20px;
+  height: 20px;
+  background: url('../../../../icons/moreEqual.png') no-repeat center;
+}
+.table .less {
+  display: block;
+  width: 20px;
+  height: 20px;
+  background: url('../../../../icons/left.png') no-repeat center;
+}
+.el-icon-minus,
+.el-icon-plus {
+  padding: 7px;
+}
+.el-form-item {
+  margin-bottom: 10px;
+}
+.el-form-item__label {
+  text-align: left;
+}
+.btn-add {
+  text-align: center;
+  margin: 10px 0;
+}
