@@ -78,7 +78,7 @@ import Open from '../events/open/open'
 
 import RightKey from './RightKey'
 
-import { encodeUnicode, decodeUnicode } from '../utils/container/canvas-list/transcoding.js'
+import { encodeUnicode } from '../utils/container/canvas-list/transcoding'
 
 
 
@@ -190,8 +190,8 @@ export default {
           name:'',
           attr:'',
           dfval:'',
-          upper:'',
-          lower:''
+          upperLimit:'',
+          lowerLimit:''
         },
         'Mapping':{
           attrTitle:'变量映射',
@@ -287,8 +287,6 @@ export default {
 
       if(Object.getOwnPropertyNames(getForm).length){
         this.form=this.container.obtainAttr(id,name)
-        // this.form.attrTitle=decodeUnicode(this.form.attrTitle)
-
       }else{
         this.form=this.deepCopy(this.formStyle[name])
         // console.log(this.form);
@@ -734,11 +732,102 @@ export default {
     // 响应 AttributeEditor.vue 组件的动作
     // TODO
     left: function() {
-      // this.container.setAttribute("left", this.left)
+      this.container.setAttribute("left", this.left)
     },
     top: function() {
-      // this.container.setAttribute("top", this.top)
+      this.container.setAttribute("top", this.top)
     },
+    height: function() {
+      this.container.setAttribute("height", this.height)
+    },
+    width: function() {
+      this.container.setAttribute("width", this.width)
+    },
+    angle: function() {
+      this.container.setAttribute("angle", this.angle)
+    },
+    length: function() {
+      this.container.setAttribute("length", this.length)
+    },
+    radius: function() {
+      this.container.setAttribute("radius", this.radius)
+    },
+    startAngle: function() {
+      this.container.setAttribute("startAngle", this.startAngle)
+    },
+    endAngle: function() {
+      this.container.setAttribute("endAngle", this.endAngle)
+    },
+    ry: function() {
+      this.container.setAttribute("ry", this.ry)
+    },
+    rx: function() {
+      this.container.setAttribute("rx", this.rx)
+    },
+    lineHeight: function() {
+      this.container.setAttribute("lineHeight", this.top)
+    },
+    fontSize: function() {
+      this.container.setAttribute("fontSize", this.top)
+    },
+    characterSpace: function() {
+      this.container.setAttribute("characterSpace", this.characterSpace)
+    },
+    text: function() {
+      this.container.setAttribute("text", this.text)
+    },
+    opacity: function() {
+      this.container.setAttribute("opacity", this.opacity)
+    },
+    strokeWidth: function() {
+      this.container.setAttribute("strokeWidth", this.strokeWidth)
+    },
+    // obrType: function() {
+    //   this.container.setAttribute("obrType", this.obrType)
+    // },
+    textAlign: function() {
+      this.container.setAttribute("textAlign", this.textAlign)
+    },
+    fontFamily: function() {
+      this.container.setAttribute("fontFamily", this.fontFamily)
+    },
+    bold: function() {
+      this.container.setAttribute("bold", this.bold)
+    },
+    italic: function() {
+      this.container.setAttribute("italic", this.italic)
+    },
+    underline: function() {
+      this.container.setAttribute("underline", this.underline)
+    },
+    grid: function() {
+      this.container.setAttribute("grid", this.grid)
+    },
+    ruler: function() {
+      this.container.setAttribute("ruler", this.ruler)
+    },
+    gridColor: function() {
+      this.container.setAttribute("gridColor", this.gridColor)
+    },
+    backgroundColor: function() {
+      this.container.setAttribute("backgroundColor", this.backgroundColor)
+    },
+    stroke: function() {
+      this.container.setAttribute("stroke", this.stroke)
+    },
+    fill: function() {
+      this.container.setAttribute("fill", this.fill)
+    },
+    textBackgroundColor: function() {
+      this.container.setAttribute("textBackgroundColor", this.textBackgroundColor)
+    },
+    layer: function() {
+      this.container.setAttribute("layer", this.layer)
+    },
+    strokeDashArray: function() {
+      this.container.setAttribute("strokeDashArray", this.strokeDashArray)
+    },
+    
 
 
     // 响应 File.vue 组件的动作

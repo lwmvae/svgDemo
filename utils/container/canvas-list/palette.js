@@ -236,7 +236,10 @@ class Palette {
 
 	// TODO：响应 AttributeEditor 组件的信号
 	setAttribute(attribute, value) {
-		// TODO:need to start from scratch
+		var obj=this.canvas.getActiveObject() || this.canvas.getActiveGroup();
+		obj.set(attribute,value)
+		obj.setCoords();
+		this.canvas.renderAll()
 	}
 
 	// @return string：序列化画布内容和画布背景所生产的 string

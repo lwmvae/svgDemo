@@ -26,8 +26,7 @@ SaveAttr.prototype.obtain=function(id,attrName){
 		if(this.addAttr[id][attrName]==undefined){
 			return {};
 		}
-		// this.addAttr[id][attrName].attrTitle=decodeUnicode(this.addAttr[id][attrName].attrTitle)
-		// console.log(this.addAttr[id][attrName].attrTitle)
+		this.addAttr[id][attrName].attrTitle=decodeUnicode(this.addAttr[id][attrName].attrTitle)
 		return this.addAttr[id][attrName];
 	}
 	return {};

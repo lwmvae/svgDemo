@@ -13,10 +13,10 @@
       <el-input v-model="form.dfval"></el-input>
     </el-form-item>
     <el-form-item label="下限">
-      <el-input v-model="form.upper"></el-input>
+      <el-input v-model="form.lowerLimit"></el-input>
     </el-form-item>
     <el-form-item label="上限">
-      <el-input v-model="form.lower"></el-input>
+      <el-input v-model="form.upperLimit"></el-input>
     </el-form-item>
   </el-form>
 </template>

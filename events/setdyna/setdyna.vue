@@ -38,6 +38,8 @@
 </template>
 <script>
 import TriggerMode from '../triggerMode/triggerMode'
+import { encodeUnicode, decodeUnicode } from '../../utils/container/canvas-list/transcoding'
+
 export default {
   props:{
     form:{
@@ -53,7 +55,7 @@ export default {
   },
   methods:{
     getType(index){
-      this.form.type=this.options[index]
+      this.form.type=encodeUnicode(this.options[index])
       // console.log(this.form.type)
     },
     add(){
@@ -75,7 +77,7 @@ export default {
   mounted(){
     this.form.value=this.filterForm(this.form.value);
     if(this.form.type){
-      this.radios=this.options.indexOf(this.form.type)
+      this.radios=this.options.indexOf(decodeUnicode(this.form.type))
     }else{
       this.radios=-1
     }

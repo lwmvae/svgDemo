@@ -56,7 +56,7 @@
             <Input size="small" :value="characterSpace" @on-blur="setCharacterSpace" @on-enter="setCharacterSpace"></Input>
           </FormItem>
           <FormItem label="输入内容" v-show="textContentVisble">
-            <Input size="small" :value="textContent" @on-change="setTextContent"></Input>
+            <Input size="small" :value="text" @on-change="setTextContent"></Input>
           </FormItem>
           <FormItem label="透明度" v-show="opacityVisble">
             <Input size="small" :value="opacity" @on-blur="setOpacity" @on-enter="setOpacity"></Input>
@@ -204,7 +204,7 @@
         lineHeight: state=>state.attributes.lineHeight,
         fontSize: state=>state.attributes.fontSize,
         characterSpace: state=>state.attributes.characterSpace,
-        textContent: state=>state.attributes.textContent,
+        text: state=>state.attributes.text,
         opacity: state=>state.attributes.opacity,
         strokeWidth: state=>state.attributes.strokeWidth,
         obrType: state=>state.attributes.obrType,
@@ -240,7 +240,7 @@
         lineHeightVisble: state=>state.show.lineHeight,
         fontSizeVisble: state=>state.show.fontSize,
         characterSpaceVisble: state=>state.show.characterSpace,
-        textContentVisble: state=>state.show.textContent,
+        textContentVisble: state=>state.show.text,
         opacityVisble: state=>state.show.opacity,
         strokeWidthVisble: state=>state.show.strokeWidth,
         obrTypeVisble: state=>state.show.obrType,
@@ -306,6 +306,7 @@
       setLeft:function (e) {
         // dir(e)
         var val = parseInt(e.target.value)
+        // console.log(val);
         this.$store.commit("SET_ATTRIBUTE_LEFT", val)
       },
       setTop:function (e) {

@@ -46,7 +46,7 @@ const state = {
   characterSpace:0,
 
   // 文本内容
-  textContent:"test",
+  text:"test",
 
   // 透明度
   opacity:0,
@@ -147,8 +147,8 @@ const mutations = {
   [types.SET_ATTRIBUTE_CHARACTER_SPACE] (state, characterSpace) {
     state.characterSpace = characterSpace
   },
-  [types.SET_ATTRIBUTE_TEXT_CONTENT] (state, textContent) {
-    state.textContent = textContent
+  [types.SET_ATTRIBUTE_TEXT_CONTENT] (state, text) {
+    state.text = text
   },
   [types.SET_ATTRIBUTE_OPACITY] (state, opacity) {
     state.opacity = opacity

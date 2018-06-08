@@ -111,6 +111,7 @@ var _shapes = function () {
 			stroke: stroke, 
 			textBackgroundColor: textBackgroundColor, 
 			fill: fill,
+			textContent:'edit',
 			obrType: 'iText',
 		}
 		)

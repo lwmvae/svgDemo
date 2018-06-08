@@ -78,9 +78,9 @@ var Container = function(vueInstance, idPrefix) {
     }
 
     // TODO
-    // C.prototype.setAttribute = function(attribute, value) {
-    //     this.canvasList.setAttribute(attribute, value)
-    // }
+    C.prototype.setAttribute = function(attribute, value) {
+        this.canvasList.setAttribute(attribute, value)
+    }
 
     // @path string：文件路径
     // @paletteId string：目标 画布 对象的索引

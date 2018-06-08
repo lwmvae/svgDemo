@@ -45,7 +45,7 @@ const state = {
   characterSpace:false,
 
   // 文本内容编辑框
-  textContent:false,
+  text:false,
 
   // 透明度编辑框
   opacity:false,

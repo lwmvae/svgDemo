@@ -79,8 +79,10 @@ export default {
   right: 0;
   bottom: 0;
   z-index: 999;
+  background-color: rgba(0,0,0,0.1);
 }
 #popup .popup-wrapper {
+  min-width: 300px;
   position: absolute;
   left: 50%;
   top: 50%;
