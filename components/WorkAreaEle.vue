@@ -39,6 +39,9 @@
       <component :is="componentName" :form="form"></component>
     </popup>
 
+    <Configure :form="defaultPaletteOption"></Configure>
+    
+
     <!-- 点击鼠标右键出现 -->
     <div id="rightKey" ref="rightKey">
       <right-key :rightShow="rightShow" @addSomething="showPop"></right-key>
@@ -80,7 +83,7 @@ import RightKey from './RightKey'
 
 import { encodeUnicode } from '../utils/container/canvas-list/transcoding'
 
-
+import Configure from './Configure'
 
 // @func function：经过 Function.prototype.bind 显示绑定 this 的函数
 // 延迟 300ms 处理
@@ -105,7 +108,8 @@ export default {
     Add,
     Go,
     Open,
-    RightKey
+    RightKey,
+    Configure
   },
 
   data: function() {
@@ -566,7 +570,8 @@ export default {
     ...mapMutations({
       setShow:'SET_SHOW_POPUP',
       setAttrData:'SET_ATTR_DATA',
-      setRightShow:'SET_RIGHT_SHOW'
+      setRightShow:'SET_RIGHT_SHOW',
+      setShowConfig:'SET_SHOW_CONFIG'
     })
 
   },
@@ -660,6 +665,7 @@ export default {
       rename: state=>state.file.rename,
       close: state=>state.file.close,
       closeAll: state=>state.file.closeAll,
+      config: state=>state.file.config,
 
 
 
@@ -698,7 +704,7 @@ export default {
     defaultPaletteOption: function() {
       return this.$store.getters.defaultPaletteOption
     },
-    ...mapGetters(['rightShow','popName'])
+    ...mapGetters(['rightShow','popName','defaultPaletteOption','showConfig'])
 
   },
   watch: {
@@ -738,10 +744,10 @@ export default {
       this.container.setAttribute("top", this.top)
     },
     height: function() {
-      this.container.setAttribute("height", this.height)
+      // this.container.setAttribute("height",this.height)
     },
     width: function() {
-      this.container.setAttribute("width", this.width)
+      // this.container.setAttribute("width", this.width)
     },
     angle: function() {
       this.container.setAttribute("angle", this.angle)
@@ -911,6 +917,11 @@ export default {
     closeAll:function() {
       this.closeRestTabs()
     },
+
+    config(){
+      this.setShowConfig(true)
+    },
+
 
 
     // 响应 Edit.vue 组件的动作

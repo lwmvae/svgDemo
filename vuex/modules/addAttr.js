@@ -3,7 +3,8 @@ import * as types from '../mutation-types'
 let state = {
   showPopup:false,
   attrData:[],
-  popName:null
+  popName:null,
+  showConfig:false
 }
 
 const getters = {
@@ -15,6 +16,9 @@ const getters = {
   },
   popName(state){
     return state.popName
+  },
+  showConfig(state) {
+    return state.showConfig
   }
 }
 
@@ -28,6 +32,9 @@ const mutations = {
   },
   [types.SET_POP_NAME](state, popName) {
     state.popName = popName
+  },
+  [types.SET_SHOW_CONFIG](state, showConfig) {
+    state.showConfig = showConfig
   }
 }
 

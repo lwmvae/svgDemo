@@ -91,6 +91,8 @@ export const SET_POP_NAME='SET_POP_NAME'
 
 export const SET_RIGHT_SHOW='SET_RIGHT_SHOW'
 
+export const SET_SHOW_CONFIG='SET_SHOW_CONFIG'
+
 
 
 

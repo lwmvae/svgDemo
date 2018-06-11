@@ -68,10 +68,7 @@ var registerEvent = function (canvas, vueInstance) {
     if (t.type === 'group') {
       customizeGroup(t)
     }
-    // if(t.obrType==="iText"){
-
-    // }
-    // console.log(t.text)
+    
     var treeTitle=t.name
     var ops = visibility[t.obrType]
     var props = utils.copy(t, ops)
