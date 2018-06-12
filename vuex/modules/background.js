@@ -14,6 +14,15 @@ const state = {
   zoom: 1,
 }
 
+const getters = {
+  backgroundHeight(state){
+    return state.backgroundHeight
+  },
+  backgroundWidth(state){
+    return state.backgroundWidth
+  }
+}
+
 const mutations = {
   [types.SET_BACKGROUND_HEIGHT] (state, backgroundHeight) {
     state.backgroundHeight = backgroundHeight
@@ -28,5 +37,6 @@ const mutations = {
 
 export default {
   state,
+  getters,
   mutations
 }

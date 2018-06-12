@@ -39,7 +39,7 @@
       <component :is="componentName" :form="form"></component>
     </popup>
 
-    <Configure :form="defaultPaletteOption"></Configure>
+    <Configure v-show="showConfig"></Configure>
     
 
     <!-- 点击鼠标右键出现 -->
@@ -704,7 +704,7 @@ export default {
     defaultPaletteOption: function() {
       return this.$store.getters.defaultPaletteOption
     },
-    ...mapGetters(['rightShow','popName','defaultPaletteOption','showConfig'])
+    ...mapGetters(['rightShow','popName','showConfig'])
 
   },
   watch: {
