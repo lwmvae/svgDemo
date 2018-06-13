@@ -11,7 +11,7 @@
       <TabPane label="系统属性" name="name1">
         <Form :label-width="80" label-position="left">
           <FormItem label="名字" v-show="nameVisble">
-            <Input size="small" :value="name"></Input>
+            <Input size="small" :value="name" readonly></Input>
           </FormItem>
           <FormItem label="左边坐标" v-show="leftVisble">
             <Input size="small" :value="left" @on-blur="setLeft" @on-enter="setLeft"></Input>
@@ -71,9 +71,8 @@
           <!-- TODO -->
           <FormItem label="线条形状" v-show="strokeDashArrayVisble">
             <Select size="small" :value="strokeDashArray">
-              <Option value="beijing">北京市</Option>
-              <Option value="shanghai">上海市</Option>
-              <Option value="shenzhen">深圳市</Option>
+              <Option value="solid">实线</Option>
+              <Option value="dash">虚线</Option>
             </Select>
           </FormItem>
           <FormItem label="图层" v-show="layerVisble">
@@ -462,5 +461,20 @@
 #ae .ivu-form{
   padding-left: 0;
   border-top: 1px solid #d0c7c7;
+}
+.ivu-form-item-content > *:first-child {
+  border-left: 1px solid #d0c7c7;
+}
+
+.ivu-form-item-label {
+  margin-top: 6px;
+}
+
+.ivu-form .ivu-form-item-label {
+  padding: 0px;
+}
+
+.ivu-form-item-content {
+  line-height: normal;
 }
 </style>

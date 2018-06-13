@@ -18,6 +18,7 @@ import store from './vuex/store'
 
 import { customize } from './utils/container/canvas-list/custom'
 
+import '../common/initial.css'
  
 Vue.use(Electron)
 Vue.use(Resource)

@@ -6,7 +6,7 @@
   <Collapse v-model="value">
     <Panel name="1">
       基本图元
-      <div slot="content">
+      <div slot="content" class="content">
         <a @click="add('Rect')" accesskey="R" title="正方形"><ObrIcon type="zhengfangxing"></ObrIcon></a>
         <a @click="add('Line')" title="直线"><ObrIcon type="zhixian"></ObrIcon></a>
         <a @click="add('Triangle')" title="三角形"><ObrIcon type="sanjiaoxing"></ObrIcon></a>
@@ -41,5 +41,14 @@
     }
   }
 </script>
-<style>
+<style scoped>
+.content a {
+  display: inline-block;
+  padding: 4px;
+  border: 1px solid transparent;
+}
+.content a:hover {
+  border: 1px solid #5cadff;
+  background-color: #f8f8f9;
+}
 </style>

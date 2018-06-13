@@ -176,8 +176,8 @@
 			var that=this;
 			window.addEventListener('keydown',function(e){
 				var keyCode = e.keyCode || e.which || e.charCode;
-        var ctrlKey = e.ctrlKey || e.metaKey;
-        var altKey = e.altKey;
+				var ctrlKey = e.ctrlKey || e.metaKey;
+				var altKey = e.altKey;
 				// console.log(altKey)
 				
 				//Ctrl+N 新建文件
@@ -231,23 +231,48 @@
 	}
 </script>
 <style>
-	.toolContainer {
-		padding: 5px 5px;
-	}
-	.toolContainer button {
-	    border: 1px solid transparent;
-	}
+.toolContainer {
+	padding: 5px 5px;
+}
+.toolContainer button {
+	border: 1px solid transparent;
+}
 
-	.toolContainer button:hover {
-	    border: 1px solid #2b85e4;
-	}
+.toolContainer button:hover {
+	border: 1px solid #2b85e4;
+}
 
-	.toolContainer .ivu-btn-group {
-		border-left: 1px inset #fff;
-		padding-left: 2px;
-	}
+.toolContainer .ivu-btn-group {
+	border-left: 1px inset #fff;
+	padding-left: 2px;
+}
 
-	.toolContainer .ivu-btn-group:first-child {
-		border-left-style: none;
-	}
+.toolContainer .ivu-btn-group:first-child {
+	border-left-style: none;
+}
+
+.ivu-btn {
+	background-color: #eee;
+}
+
+.ivu-collapse {
+	background-color: #eee;
+}
+
+.ivu-collapse-content {
+	background-color: #eee;
+}
+
+.is-active {
+	background-color: #fff;
+}
+
+.ivu-form-item {
+	margin-bottom: 1px;
+	border-bottom: 1px solid #d0c7c7;
+}
+
+.ivu-form {
+	padding-left: 3px;
+}
 </style>

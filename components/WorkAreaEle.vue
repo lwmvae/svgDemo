@@ -580,7 +580,8 @@ export default {
     // 初始化
     // 将 container 挂载到 this 上，再新建一个 tab
     this.container = new Container(this, this.prefix)
-    this.addTab()
+    this.addTab();
+
   },
 
   beforeUpdate:function() {
@@ -999,6 +1000,10 @@ export default {
 <style >
 #con{
   position: relative;
+  /*height: 100%;*/
+}
+.el-tabs{
+  /*height: 100%;*/
 }
 #rightKey{
   background-color: #fff;
@@ -1014,6 +1019,7 @@ export default {
   position: absolute;
   left: 22px;
   top: 22px;
+  
 }
 .el-tabs__item{
   padding: 0 10px;
@@ -1022,6 +1028,19 @@ export default {
 }
 .el-tabs--card>.el-tabs__header .el-tabs__item.is-active.is-closable{
   padding:0 10px;
+}
+.el-tabs__content {
+  /*overflow: visible;*/
+  overflow: auto;
+  /*word-spacing: -3px;*/
+  background-color: #fff;
+  /*border-left: 1px solid #d0c7c7;*/
+  /*border-right: 1px solid #d0c7c7;*/
+  /*height:100%;*/
+  /*position: relative;*/
+}
+.el-tabs__header {
+  margin-bottom: 0px;
 }
 </style>
 

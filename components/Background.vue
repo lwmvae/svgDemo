@@ -95,6 +95,8 @@
 <style scoped>
 #background{
 	position: relative;
+	top:0;
+	left:0;
 }
 #horizontalRuler{
   background-color: #fff;

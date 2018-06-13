@@ -6,7 +6,7 @@
       <div id="component">
         <component-selector></component-selector>
       </div>
-      <div id="work-area" :style="workAreaStyle">
+      <div id="work-area">
         <WorkAreaEle></WorkAreaEle>
       </div>
       <div id="editor">
@@ -70,17 +70,10 @@ export default {
       style['height'] = `${this.contentHeight}px`
       return style
     },
-
-    workAreaStyle() {
-      let style = {};
-      style['width'] = `${this.workAreaWidth}px`
-      return style
-    },
   },
   methods:{
     adjustLayout() {
       this.contentHeight = window.innerHeight - boundingRectById('#content').top - boundingRectById('#status-bar').height
-      this.workAreaWidth = boundingRectById('#content').width - boundingRectById("#component").width - boundingRectById('#editor').width - 10
     },
     rightKeyHide(){
       this.setRightShow(false)
@@ -99,52 +92,20 @@ export default {
 }
 </script>
 <style>
-
-html, body{
-  overflow: hidden;
-}
-
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-
 #app {
   overflow: hidden;
   background-color: #eee;
 }
-
-.clearFix:after {
-  content: "";
-  display: block;
-  clear: both; 
-}
-
-#content > div {
-  float: left;
-  height: 100%;
-}
-
 #content {
   overflow: hidden;
+  display: flex;
 }
-
-#component a {
-  display: inline-block;
-  padding: 4px;
-  border: 1px solid transparent;
-}
-
-#component a:hover {
-  border: 1px solid #5cadff;
-  background-color: #f8f8f9;
-}
-
 #component {
   width: 146px;
 }
-
+#work-area{
+  flex: 1;
+}
 #editor {
   width: 168px;
   background-color: #fff;
@@ -153,8 +114,15 @@ html, body{
   border-top: 1px solid #d0c7c7;*/
   margin-top: 30px;
 }
+#work-area > div, #work-area > * > .el-tabs--card {
+  height: 100%;
+}
+#status-bar {
+  border: 1px solid #d0c7c7;
+  height: 20px;
+}
 
-.ivu-btn {
+/*.ivu-btn {
   background-color: #eee;
 }
 
@@ -177,33 +145,13 @@ html, body{
 
 .ivu-form {
   padding-left: 3px;
-}
+}*/
 
-div.canvas-container {
-}
 
-div.el-tabs__content {
-  overflow: auto;
-  word-spacing: -3px;
-  background-color: #fff;
-  border-left: 1px solid #d0c7c7;
-  border-right: 1px solid #d0c7c7;
-}
 
-div.el-tabs__header {
-  margin-bottom: 0px;
-}
 
-#work-area > div, #work-area > * > .el-tabs--card {
-  height: 100%;
-}
 
-#status-bar {
-  border: 1px solid #d0c7c7;
-  height: 20px;
-}
-
-.ivu-form-item-content > *:first-child {
+/*.ivu-form-item-content > *:first-child {
   border-left: 1px solid #d0c7c7;
 }
 
@@ -217,5 +165,5 @@ div.el-tabs__header {
 
 .ivu-form-item-content {
   line-height: normal;
-}
+}*/
 </style>

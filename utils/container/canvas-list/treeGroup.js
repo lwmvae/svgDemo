@@ -1,3 +1,6 @@
+//生成右侧树形结构数据
+//
+
 var listGroup=function(arr){
 	var newArr=[];
 	for(var i=0;i<arr.length;i++){
@@ -11,8 +14,6 @@ var listGroup=function(arr){
 	}
 	return newArr
 }
-
-
 
 
 export {listGroup}

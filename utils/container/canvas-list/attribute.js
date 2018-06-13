@@ -1,9 +1,11 @@
+// 保存属性及事件
+
 import {decodeUnicode} from './transcoding'
 
 function SaveAttr() {
 	this.addAttr={};	
 }
-
+//增加
 SaveAttr.prototype.add=function(id,attrName,data){
 	if(this.addAttr[id]){
 		this.addAttr[id][attrName]=data;
@@ -14,13 +16,13 @@ SaveAttr.prototype.add=function(id,attrName,data){
 	}
 	// console.log(this.addAttr[id])
 }
-
+// 删除
 SaveAttr.prototype.del=function(id,attrName){
 	if(this.addAttr[id]){
 		return this.addAttr[id][attrName]={}
 	}
 }
-
+// 获取
 SaveAttr.prototype.obtain=function(id,attrName){
 	if(this.addAttr[id]){
 		if(this.addAttr[id][attrName]==undefined){
@@ -31,7 +33,7 @@ SaveAttr.prototype.obtain=function(id,attrName){
 	}
 	return {};
 }
-
+// 获取过滤后的属性及事件名称
 SaveAttr.prototype.getAttr=function(id){
 	var obj=this.addAttr[id];
 	if(obj){
@@ -50,7 +52,7 @@ SaveAttr.prototype.getAttr=function(id){
 	}
 	
 }
-
+// id改变时复制数据
 SaveAttr.prototype.idChange=function(oldId,newId){
 	var oldVal=JSON.stringify(this.addAttr[oldId]);
 	this.addAttr[newId]=JSON.parse(oldVal);
