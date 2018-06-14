@@ -154,6 +154,14 @@ function CanvasList(vueInstance) {
         this.cur.setRulerVisibility(rulerVisibility)
     }
 
+    // C.prototype.setBgWidth = function(backgroundWidth) {
+    //     this.cur.setBgWidth(backgroundWidth)
+    // }
+
+    // C.prototype.setBgHeight = function(backgroundHeight) {
+    //     this.cur.setBgHeight(backgroundHeight)
+    // }
+
     // 放大
     C.prototype.zoomIn = function() {
         this.cur.zoomIn()

@@ -25,6 +25,12 @@
           <FormItem label="宽度" v-show="widthVisble">
             <Input size="small" :value="width" @on-blur="setWidth" @on-enter="setWidth"></Input>
           </FormItem>
+          <FormItem label="高度" v-show="backgroundHeightVisble">
+            <Input size="small" :value="backgroundHeight" @on-blur="setBgHeight" @on-enter="setBgHeight"></Input>
+          </FormItem>
+          <FormItem label="宽度" v-show="backgroundWidthVisble">
+            <Input size="small" :value="backgroundWidth" @on-blur="setBgWidth" @on-enter="setBgWidth"></Input>
+          </FormItem>
           <FormItem label="旋转角度" v-show="angleVisble">
             <Input size="small" :value="angle" @on-blur="setAngle" @on-enter="setAngle"></Input>
           </FormItem>
@@ -216,6 +222,8 @@
         rulerVisibility: state=>state.attributes.rulerVisibility,
         gridColor: state=>state.attributes.gridColor,
         backgroundColor: state=>state.attributes.backgroundColor,
+        backgroundWidth: state=>state.attributes.backgroundWidth,
+        backgroundHeight: state=>state.attributes.backgroundHeight,
         stroke: state=>state.attributes.stroke,
         fill: state=>state.attributes.fill,
         textBackgroundColor:state=>state.attributes.textBackgroundColor,
@@ -252,6 +260,8 @@
         rulerVisble: state=>state.show.ruler,
         gridColorVisble: state=>state.show.gridColor,
         backgroundColorVisble: state=>state.show.backgroundColor,
+        backgroundWidthVisble: state=>state.show.backgroundWidth,
+        backgroundHeightVisble: state=>state.show.backgroundHeight,
         strokeVisble: state=>state.show.stroke,
         fillVisble: state=>state.show.fill,
         textBackgroundColorVisble:state=>state.show.textBackgroundColor,
@@ -319,6 +329,14 @@
       setWidth:function (e) {
         var val = parseInt(e.target.value)
         this.$store.commit("SET_ATTRIBUTE_WIDTH", val)
+      },
+      setBgHeight:function (e) {
+        var val=parseInt(e.target.value)
+        this.$store.commit("SET_ATTRIBUTE_BACKGROUND_HEIGHT", val)
+      },
+      setBgWidth:function (e) {
+        var val=parseInt(e.target.value)
+        this.$store.commit("SET_ATTRIBUTE_BACKGROUND_WIDTH", val)
       },
       setAngle:function (e) {
         var val = parseInt(e.target.value)

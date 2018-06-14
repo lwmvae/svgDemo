@@ -20,8 +20,10 @@ var num;
 
 // 记录 Palette 类实例与 attribute.js 属性名的对应关系
 var attrMap = {
-	'canvasHeight': 'height',
-	'canvasWidth': 'width',
+	// 'canvasHeight': 'height',
+	// 'canvasWidth': 'width',
+	'canvasHeight': 'backgroundHeight',
+	'canvasWidth': 'backgroundWidth',
 	'gridVisibility': 'gridVisibility',
 	'gridColor': 'gridColor',
 	'rulerVisibility': 'rulerVisibility',
@@ -65,7 +67,7 @@ var _setZoom = function(canvas, zoomVal) {
 var _initCanvas = function(canvas, options) {
 	canvas.setWidth(options.canvasWidth)
 	canvas.setHeight(options.canvasHeight)
-
+	// canvas.renderAll()
 	//必须透明，否则会遮挡网格线
 	canvas.setBackgroundColor('rgba(255, 255, 255, 0.0)')
 }
@@ -237,8 +239,15 @@ class Palette {
 	// TODO：响应 AttributeEditor 组件的信号
 	setAttribute(attribute, value) {
 		var obj=this.canvas.getActiveObject() || this.canvas.getActiveGroup();
-		obj.set(attribute,value);
-		obj.setCoords();
+		//不选中任何图形
+		if(obj == undefined){
+			this[attribute]=value;
+			this.recordHistory()
+		}else{
+			obj.set(attribute,value);
+			obj.setCoords();
+		}
+		
 		this.canvas.renderAll();
 	}
 
@@ -387,6 +396,16 @@ class Palette {
 	setRulerVisibility(rulerVisibility) {
 		this.rulerVisibility = rulerVisibility
 	}
+
+	// setBgWidth(backgroundWidth){
+	// 	this.canvasWidth=backgroundWidth
+	// }
+
+	// setBgHeight(backgroundHeight){
+	// 	this.canvasHeight=backgroundHeight
+	// }
+
+
 
 	// 放大
 	zoomIn() {

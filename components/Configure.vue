@@ -9,24 +9,24 @@
 				<div class="popup-content">
 					<el-form label-width="80px">
 						<el-form-item label="画布宽度">
-							<el-input v-model="backgroundWidth"></el-input>
+							<el-input v-model="form.backgroundWidth"></el-input>
 						</el-form-item>
 						<el-form-item label="画布高度">
-							<el-input v-model="backgroundHeight"></el-input>
+							<el-input v-model="form.backgroundHeight"></el-input>
 						</el-form-item>
 						<el-form-item label="背景颜色">
-							<el-color-picker v-model="backgroundColor"></el-color-picker>
+							<el-color-picker v-model="form.backgroundColor"></el-color-picker>
 						</el-form-item>
 						<el-form-item label="标尺">
-							<el-switch v-model="value1" on-text="on" off-text="off" @change="rule">
+							<el-switch v-model="form.rulerVisibility" on-text="on" off-text="off">
 							</el-switch>
 						</el-form-item>
 						<el-form-item label="网格">
-							<el-switch v-model="value2" on-text="on" off-text="off" @change="grid">
+							<el-switch v-model="form.gridVisibility" on-text="on" off-text="off">
 							</el-switch>
 						</el-form-item>
 						<el-form-item label="网线颜色">
-							<el-color-picker v-model="gridColor"></el-color-picker>
+							<el-color-picker v-model="form.gridColor"></el-color-picker>
 						</el-form-item>
 					</el-form>
 				</div>
@@ -44,12 +44,29 @@
 		data(){
 			return{
 				value1:true,
-				value2:true
+				value2:true,
+				form:{
+					backgroundWidth:0,
+					backgroundHeight:0,
+					gridVisibility:true,
+					rulerVisibility:true,
+					backgroundColor:'',
+					gridColor:''
+				}
 			}
 		},
 		mounted(){
-			this.value1=this.rulerVisibility;
-			this.value2=this.gridVisibility;
+
+			setTimeout(()=>{
+				this.form.backgroundWidth=this.backgroundWidth;
+				this.form.backgroundHeight=this.backgroundHeight;
+				this.form.rulerVisibility=this.rulerVisibility;
+				this.form.gridVisibility=this.gridVisibility;
+				this.form.backgroundColor=this.backgroundColor;
+				this.form.gridColor=this.gridColor;
+			},0)
+			
+
 			var title=this.$refs.title;
 			var wrapper=this.$refs.wrapper;
 			title.onmousedown=function(e){
@@ -71,34 +88,48 @@
 			delBtn(){
 				this.setShowConfig(false);
 			},
-			rule(){
-				this.rulerVisibility = this.value1;
-			},
-			grid(){
-				this.gridVisibility=this.value2;
-			},
 			saveConfig(){
 				this.setShowConfig(false);
+				
+				this.form.backgroundWidth=parseInt(this.form.backgroundWidth);
+				this.form.backgroundHeight=parseInt(this.form.backgroundHeight);
+			
+				this.setAttributes(this.form);
 			},
 			...mapMutations({
 				setShowConfig:'SET_SHOW_CONFIG',
-				setBgHeight:'SET_BACKGROUND_HEIGHT',
-				setBgWidth:'SET_BACKGROUND_WIDTH',
-				setGridVisibility:'SET_ATTRIBUTE_GRID_VISIBILITY',
-				setRulerVisibility:'SET_ATTRIBUTE_RULER_VISIBILITY',
-				setGridColor:'SET_ATTRIBUTE_GRID_COLOR',
-				setbackgroundColor:'SET_ATTRIBUTE_BACKGROUND_COLOR'
+				setAttributes:'SET_ATTRIBUTES'
 			})
 		},
 		computed:{
 			...mapState({
-				backgroundHeight: state=>state.background.backgroundHeight,
-				backgroundWidth: state=>state.background.backgroundWidth,
+				backgroundHeight: state=>state.attributes.backgroundHeight,
+				backgroundWidth: state=>state.attributes.backgroundWidth,
 				gridVisibility: state=>state.attributes.gridVisibility,
 				rulerVisibility: state=>state.attributes.rulerVisibility,
 				gridColor: state=>state.attributes.gridColor,
 				backgroundColor: state=>state.attributes.backgroundColor
 			})
+		},
+		watch:{
+			backgroundHeight(newVal){
+				this.form.backgroundHeight=newVal
+			},
+			backgroundWidth(newVal){
+				this.form.backgroundWidth=newVal
+			},
+			gridVisibility(newVal){
+				this.form.gridVisibility=newVal
+			},
+			rulerVisibility(newVal){
+				this.form.rulerVisibility=newVal
+			},
+			gridColor(newVal){
+				this.form.gridColor=newVal
+			},
+			backgroundColor(newVal){
+				this.form.backgroundColor=newVal
+			}
 		}
 	}
 </script>

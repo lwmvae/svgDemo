@@ -22,6 +22,12 @@ const state = {
 }
 
 const mutations = {
+  // [types.SET_CANVAS_WIDTH](state,canvasWidth){
+  //   state.canvasWidth=canvasWidth
+  // },
+  // [types.SET_CANVAS_HEIGHT](state,canvasHeight){
+  //   state.canvasHeight=canvasHeight
+  // },
   [types.UPDATE_CONFIG] (state, option) {
     Object.keys(option).forEach((key) => {
       state[key] = option[key]

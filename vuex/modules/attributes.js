@@ -80,8 +80,8 @@ const state = {
   backgroundColor:"#888888",
 
   // 逻辑上不属于该文件 TODO， 见 background.js
-  // backgroundHeight: 300,
-  // backgroundWidth: 400,
+  backgroundHeight: 0,
+  backgroundWidth: 0,
 
   // 线条颜色
   stroke:"#ff0000",
@@ -183,12 +183,12 @@ const mutations = {
   [types.SET_ATTRIBUTE_GRID_COLOR] (state, gridColor) {
     state.gridColor = gridColor
   },
-  // [types.SET_ATTRIBUTE_BACKGROUND_HEIGHT] (state, backgroundHeight) {
-  //   state.backgroundHeight = backgroundHeight
-  // },
-  // [types.SET_ATTRIBUTE_BACKGROUND_WIDTH] (state, backgroundWidth) {
-  //   state.backgroundWidth = backgroundWidth
-  // },
+  [types.SET_ATTRIBUTE_BACKGROUND_HEIGHT] (state, backgroundHeight) {
+    state.backgroundHeight = backgroundHeight
+  },
+  [types.SET_ATTRIBUTE_BACKGROUND_WIDTH] (state, backgroundWidth) {
+    state.backgroundWidth = backgroundWidth
+  },
   [types.SET_ATTRIBUTE_BACKGROUND_COLOR] (state, backgroundColor) {
     state.backgroundColor = backgroundColor
   },

@@ -41,7 +41,6 @@
 			return {
 			}
 		},
-
 		methods:{
 			// 设定网格线的属性
 			setLinesProperty:function(options) {
@@ -93,6 +92,7 @@
 			},
 			bgcolor: function() {
 				this.canvas.setBackgroundColor(this.bgcolor)
+				this.canvas.renderAll()
 			},
 			height: function() {
 				this.canvas.setHeight(this.height)

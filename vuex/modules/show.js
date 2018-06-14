@@ -83,6 +83,12 @@ const state = {
   // 背景颜色编辑框
   backgroundColor:false,
 
+  // 背景高度
+  backgroundHeight: false,
+
+  // 背景宽度
+  backgroundWidth: false,
+
   // 线条颜色编辑框
   stroke:false,
 

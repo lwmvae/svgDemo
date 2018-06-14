@@ -640,6 +640,8 @@ export default {
       rulerVisibility: state=>state.attributes.rulerVisibility,
       gridColor: state=>state.attributes.gridColor,
       backgroundColor: state=>state.attributes.backgroundColor,
+      backgroundWidth: state=>state.attributes.backgroundWidth,
+      backgroundHeight: state=>state.attributes.backgroundHeight,
       stroke: state=>state.attributes.stroke,
       fill: state=>state.attributes.fill,
       textBackgroundColor: state=>state.attributes.textBackgroundColor,
@@ -651,8 +653,8 @@ export default {
 
 
 
-      backgroundHeight: state=>state.background.backgroundHeight,
-      backgroundWidth: state=>state.background.backgroundWidth,
+      // backgroundHeight: state=>state.background.backgroundHeight,
+      // backgroundWidth: state=>state.background.backgroundWidth,
       zoom: state=>state.background.zoom,
 
 
@@ -745,10 +747,10 @@ export default {
       this.container.setAttribute("top", this.top)
     },
     height: function() {
-      // this.container.setAttribute("height",this.height)
+      this.container.setAttribute("height",this.height)
     },
     width: function() {
-      // this.container.setAttribute("width", this.width)
+      this.container.setAttribute("width", this.width)
     },
     angle: function() {
       this.container.setAttribute("angle", this.angle)
@@ -818,6 +820,12 @@ export default {
     },
     backgroundColor: function() {
       this.container.setAttribute("backgroundColor", this.backgroundColor)
+    }, 
+    backgroundWidth: function() {
+      this.container.setAttribute("canvasWidth", this.backgroundWidth)
+    }, 
+    backgroundHeight: function() {
+      this.container.setAttribute("canvasHeight", this.backgroundHeight)
     },
     stroke: function() {
       this.container.setAttribute("stroke", this.stroke)
@@ -970,6 +978,14 @@ export default {
     rulerVisibility:function() {
       this.container.setRulerVisibility(this.rulerVisibility)
     },
+
+    // backgroundWidth(){
+    //   this.container.setBgWidth(this.backgroundWidth)
+    // },
+    // backgroundHeight(){
+    //   this.container.setBgHeight(this.backgroundHeight)
+    // },
+
     // 放大
     zoomIn:function() {
       this.container.zoomIn()

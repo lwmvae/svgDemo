@@ -279,6 +279,14 @@ var Container = function(vueInstance, idPrefix) {
         this.canvasList.setRulerVisibility(rulerVisibility)
     }
 
+    // C.prototype.setBgWidth = function(backgroundWidth) {
+    //     this.canvasList.setBgWidth(backgroundWidth)
+    // }
+
+    // C.prototype.setBgHeight = function(backgroundHeight) {
+    //     this.canvasList.setBgHeight(backgroundHeight)
+    // }
+
     // 放大
     C.prototype.zoomIn = function() {
         this.canvasList.zoomIn()
