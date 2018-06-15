@@ -62,7 +62,7 @@
             <Input size="small" :value="characterSpace" @on-blur="setCharacterSpace" @on-enter="setCharacterSpace"></Input>
           </FormItem>
           <FormItem label="输入内容" v-show="textContentVisble">
-            <Input size="small" :value="text" @on-change="setTextContent"></Input>
+            <Input size="small" :value="text" @on-blur="setTextContent" @on-enter="setTextContent"></Input>
           </FormItem>
           <FormItem label="透明度" v-show="opacityVisble">
             <Input size="small" :value="opacity" @on-blur="setOpacity" @on-enter="setOpacity"></Input>
@@ -76,7 +76,7 @@
 
           <!-- TODO -->
           <FormItem label="线条形状" v-show="strokeDashArrayVisble">
-            <Select size="small" :value="strokeDashArray">
+            <Select size="small" :value="strokeDashArray" @on-change="setStrokeDashArray">
               <Option value="solid">实线</Option>
               <Option value="dash">虚线</Option>
             </Select>
@@ -379,6 +379,7 @@
         this.$store.commit("SET_ATTRIBUTE_CHARACTER_SPACE", val)
       },
       setTextContent:function (e) {
+        console.log(e.target.value)
         this.$store.commit("SET_ATTRIBUTE_TEXT_CONTENT", e.target.value)
       },
       setOpacity:function (e) {
@@ -389,6 +390,9 @@
         var val = parseInt(e.target.value)
         this.$store.commit("SET_ATTRIBUTE_STROKE_WIDTH", val)
       },
+      // setStrokeDashArray(e){
+      //   console.log(e)
+      // },
       setTextAlign:function (align) {
         this.$store.commit("SET_ATTRIBUTE_TEXT_ALIGN", align)
       },
@@ -432,6 +436,7 @@
         this.$store.commit("SET_ATTRIBUTE_LAYER", layer)
       },
       setStrokeDashArray:function (val) {
+        // console.log(val);
         this.$store.commit("SET_ATTRIBUTE_STROKE_DASH_ARRAY", val)
       },
     },

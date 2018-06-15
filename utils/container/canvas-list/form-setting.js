@@ -425,7 +425,7 @@ export const iText = {
   grid:false,
   ruler:false,
   gridColor: false,
-  backgroundColor: true,
+  backgroundColor: false,
   backgroundHeight: false,
   backgroundWidth: false,
   stroke: true,

@@ -5,8 +5,8 @@
 var _shapes = function () {
 
 	// 基本图元的默认属性
-	var left = 50
-	var top = 50
+	// var left = 50
+	// var top = 50
 	var stroke = "#ffffff"
 	var fill = "#808080"
 	var height = 80
@@ -21,12 +21,14 @@ var _shapes = function () {
 
 	// 返回的对象
 	var o = {
+		left:50,
+		top:50
 	}
 
 	o.Rect = function() {
 		var r = new fabric.Rect({ 
-			top: top, 
-			left: left, 
+			top: this.top, 
+			left: this.left, 
 			width: width, 
 			height: height, 
 			stroke: stroke, 
@@ -40,8 +42,8 @@ var _shapes = function () {
 
 	o.Triangle = function () {
 		var t = new fabric.Triangle({ 
-			top: top, 
-			left: left, 
+			top: this.top, 
+			left: this.left, 
 			width: width, 
 			height: height, 
 			stroke: stroke, 
@@ -61,7 +63,7 @@ var _shapes = function () {
 			mt: false,
 			tr: false,
 		}
-		var l =  new fabric.Line([left, top, left+120, top], {
+		var l =  new fabric.Line([this.left, this.top, this.left+120, this.top], {
 			stroke:stroke,
 			padding:padding,
 			obrType: 'line',
@@ -79,8 +81,8 @@ var _shapes = function () {
 			mr: false,
 		}
 		var c = new fabric.Circle({ 
-			top: top, 
-			left: left, 
+			top: this.top, 
+			left: this.left, 
 			radius: radius, 
 			stroke: stroke, 
 			fill: fill, 
@@ -93,8 +95,8 @@ var _shapes = function () {
 
 	o.Ellipse = function() {
 		var e = new fabric.Ellipse({
-			left: left,
-			top: top,
+			left: this.left,
+			top: this.top,
 			stroke: stroke,
 			fill: fill,
 			rx: rx,
@@ -106,15 +108,15 @@ var _shapes = function () {
 
 	o.Text = function() {
 		var t = new fabric.IText('edit', { 
-			top: top, 
-			left: left, 
+			top: this.top, 
+			left: this.left, 
 			stroke: stroke, 
 			textBackgroundColor: textBackgroundColor, 
 			fill: fill,
 			textContent:'edit',
 			obrType: 'iText',
-		}
-		)
+		})
+		// console.log(t)
 		return t
 	}
 
@@ -122,8 +124,8 @@ var _shapes = function () {
 	o.Sector = function() {
 		var s = new fabric.Path(sectorPath)
 		s.set({
-			top:top,
-			left:left,
+			top:this.top,
+			left:this.left,
 			fill:fill,
 			stroke:stroke,
 		})
@@ -140,8 +142,8 @@ var _shapes = function () {
 	o.Curve = function() {
 		var c = new fabric.Path(curvePath)
 		c.set({
-			top:top,
-			left:left,
+			top:this.top,
+			left:this.left,
 			fill:'transparent',
 			stroke:stroke,
 			obrType: 'curve',
@@ -159,8 +161,8 @@ var _shapes = function () {
 			{ x: 40, y: 80 },
 			], {
 				stroke: stroke,
-				left: left,
-				top: top,
+				left: this.left,
+				top: this.top,
 				fill:fill,
 				obrType: 'polygon',
 			})
@@ -176,8 +178,8 @@ var _shapes = function () {
 			{ x: 40, y: 80 },
 			], {
 				stroke: stroke,
-				left: left,
-				top: top,
+				left: this.left,
+				top: this.top,
 				fill:'transparent',
 				obrType: 'polyline',
 			})

@@ -3,6 +3,7 @@
 <!-- 该组件根据传入的 props 属性来改变画布的背景 -->
 <template>
 	<div id="background">
+		<div id="hidden"></div>
 		<div id="horiz-container" v-show='rulerVisibility'>
 			<Ruler id='horizontalRuler' orientation='horizontal' :location='hLocation' :params='hParams'></Ruler>
 		</div>
@@ -101,26 +102,33 @@
 #horizontalRuler{
   background-color: #fff;
 }
-
 #verticalRuler{
   background-color: #fff;
 }
-
+#hidden{
+	position: absolute;
+	top: 0;
+	left:0;
+	width: 20px;
+	height:20px;
+	background-color:#fff;
+	z-index: 11;
+}
 #horiz-container {
   position: absolute;
-  left: 22px;
-  top: 2px;
+  left: 20px;
+  top: 0px;
+  z-index: 10;
 }
-
 #verti-container {
   position: absolute;
-  left: 2px;
-  top: 22px;
+  left: 0px;
+  top: 20px;
+  z-index: 10;
 }
-
 #grid-container {
   position: absolute;
-  left: 22px;
-  top: 22px;
+  left: 20px;
+  top: 20px;
 }
 </style>

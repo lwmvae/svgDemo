@@ -4,7 +4,7 @@ let state = {
   showPopup:false,
   attrData:[],
   popName:null,
-  showConfig:false
+  showConfig:true
 }
 
 const getters = {

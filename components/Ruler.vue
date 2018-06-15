@@ -87,8 +87,10 @@
 			setLength(length) {
 				if(this.isVertical) {
 					this.canvas.setHeight(length)
+					this.canvas.setWidth(20)
 				} else {
 					this.canvas.setWidth(length)
+					this.canvas.setHeight(20)
 				}
 			}
 		},

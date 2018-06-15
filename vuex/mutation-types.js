@@ -103,3 +103,8 @@ export const SET_SHOW_CONFIG='SET_SHOW_CONFIG'
 //树形结构
 export const SET_TREE='SET_TREE'
 export const SET_TREE_TITLE='SET_TREE_TITLE'
+
+//scroll.js
+export const SET_SCROLL_TOP='SET_SCROLL_TOP'
+export const SET_SCROLL_LEFT='SET_SCROLL_LEFT'
+

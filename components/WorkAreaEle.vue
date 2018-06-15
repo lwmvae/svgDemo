@@ -571,7 +571,9 @@ export default {
       setShow:'SET_SHOW_POPUP',
       setAttrData:'SET_ATTR_DATA',
       setRightShow:'SET_RIGHT_SHOW',
-      setShowConfig:'SET_SHOW_CONFIG'
+      setShowConfig:'SET_SHOW_CONFIG',
+      setScrollTop:'SET_SCROLL_TOP',
+      setScrollLeft:'SET_SCROLL_LEFT'
     })
 
   },
@@ -581,6 +583,22 @@ export default {
     // 将 container 挂载到 this 上，再新建一个 tab
     this.container = new Container(this, this.prefix)
     this.addTab();
+
+    let eleContent = document.querySelector(".el-tabs__content");
+    let hidden = document.querySelector("#hidden");
+    let horizCon = document.querySelector("#horiz-container");
+    let vertiCon = document.querySelector("#verti-container");
+    var __that=this;
+    eleContent.addEventListener('scroll',function(){
+
+      __that.setScrollTop(eleContent.scrollTop)
+      __that.setScrollLeft(eleContent.scrollLeft)
+
+      hidden.style.top=eleContent.scrollTop+'px';
+      hidden.style.left=eleContent.scrollLeft+'px';
+      horizCon.style.top=eleContent.scrollTop+'px';
+      vertiCon.style.left=eleContent.scrollLeft+'px';
+    },true) 
 
   },
 
@@ -627,7 +645,7 @@ export default {
       lineHeight: state=>state.attributes.lineHeight,
       fontSize: state=>state.attributes.fontSize,
       characterSpace: state=>state.attributes.characterSpace,
-      textContent: state=>state.attributes.textContent,
+      textContent: state=>state.attributes.text,
       opacity: state=>state.attributes.opacity,
       strokeWidth: state=>state.attributes.strokeWidth,
       obrType: state=>state.attributes.obrType,
@@ -700,7 +718,8 @@ export default {
       defaultCanvasWidth: state => state.config.canvasWidth,
       defaultBackgroundColor: state => state.config.backgroundColor,
 
-      treeTitle: state => state.tree.treeTitle
+      treeTitle: state => state.tree.treeTitle,
+
     }),
 
     // 画布的默认属性，见 config.js 
@@ -741,16 +760,20 @@ export default {
     // 响应 AttributeEditor.vue 组件的动作
     // TODO
     left: function() {
-      this.container.setAttribute("left", this.left)
+      let val=Math.round(this.left)
+      this.container.setAttribute("left", val)
     },
     top: function() {
-      this.container.setAttribute("top", this.top)
+      let val=Math.round(this.top)
+      this.container.setAttribute("top", val)
     },
     height: function() {
-      this.container.setAttribute("height",this.height)
+      let val=Math.round(this.height)
+      this.container.setAttribute("height",val)
     },
     width: function() {
-      this.container.setAttribute("width", this.width)
+      let val=Math.round(this.width)
+      this.container.setAttribute("width", val)
     },
     angle: function() {
       this.container.setAttribute("angle", this.angle)
@@ -774,16 +797,17 @@ export default {
       this.container.setAttribute("rx", this.rx)
     },
     lineHeight: function() {
-      this.container.setAttribute("lineHeight", this.top)
+      this.container.setAttribute("lineHeight", this.lineHeight)
     },
     fontSize: function() {
-      this.container.setAttribute("fontSize", this.top)
+      this.container.setAttribute("fontSize", this.fontSize)
     },
     characterSpace: function() {
       this.container.setAttribute("characterSpace", this.characterSpace)
     },
-    text: function() {
-      this.container.setAttribute("text", this.text)
+    textContent: function() {
+      console.log(this.textContent)
+      this.container.setAttribute("text", this.textContent)
     },
     opacity: function() {
       this.container.setAttribute("opacity", this.opacity)
@@ -840,7 +864,8 @@ export default {
       this.container.setAttribute("layer", this.layer)
     },
     strokeDashArray: function() {
-      this.container.setAttribute("strokeDashArray", this.strokeDashArray)
+      // console.log(this.strokeDashArray)
+      // this.container.setAttribute("strokeDashArray", this.strokeDashArray)
     },
     
 
@@ -1016,10 +1041,6 @@ export default {
 <style >
 #con{
   position: relative;
-  /*height: 100%;*/
-}
-.el-tabs{
-  /*height: 100%;*/
 }
 #rightKey{
   background-color: #fff;
@@ -1033,9 +1054,8 @@ export default {
 }
 .el-tab-pane {
   position: absolute;
-  left: 22px;
-  top: 22px;
-  
+  left: 20px;
+  top: 20px;
 }
 .el-tabs__item{
   padding: 0 10px;
@@ -1046,7 +1066,6 @@ export default {
   padding:0 10px;
 }
 .el-tabs__content {
-  /*overflow: visible;*/
   overflow: auto;
   /*word-spacing: -3px;*/
   background-color: #fff;

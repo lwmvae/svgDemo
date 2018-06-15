@@ -179,6 +179,10 @@ class Palette {
 	//       object：fabric 对象
 	// 在 画布 上添加图形
 	addShape(type) {
+		//重新确定要添加的位置
+		shapes.top=this.vue.$store.state.scroll.scrollTop+50
+		shapes.left=this.vue.$store.state.scroll.scrollLeft+50
+
 		var o = typeof type === 'object' ? type : shapes[type]()
 		
 		this.vue.$store.commit('ADDNUM',o.obrType);
@@ -245,7 +249,37 @@ class Palette {
 			this.recordHistory()
 		}else{
 			obj.set(attribute,value);
+
+			if(obj.obrType==='iText'){
+				if(attribute==='bold'){
+					if(value){
+						obj.set('fontWeight','bold')
+					}else{
+						obj.set('fontWeight','normal')
+					}
+				}
+				if (attribute==='italic') {
+					if(value){
+						obj.set('fontStyle','italic')
+					}else{
+						obj.set('fontStyle','normal')
+					}
+
+				} 
+				if (attribute==='underline') {
+					if(value){
+						obj.set('textDecoration','underline')
+					}else{
+						obj.set('textDecoration','')
+					}
+
+				} 
+			
+			}
+
+
 			obj.setCoords();
+			// console.log(obj);
 		}
 		
 		this.canvas.renderAll();

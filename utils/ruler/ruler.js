@@ -85,6 +85,7 @@ var lines = function(isVertical, params, height) {
 // @return object：fabric.IText 类实例
 // 生成单个刻度值
 var label = function(text, option) {
+	var text=Math.round(text)+'';
 	return new fabric.IText(text, option)
 }
 

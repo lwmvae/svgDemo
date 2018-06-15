@@ -155,7 +155,6 @@
 }
 #popup .popup-container {
 	background-color: #fff;
-	border: 1px solid #dfdfdf;
 }
 #popup .popup-title {
 	padding: 0 5px 0 10px;
