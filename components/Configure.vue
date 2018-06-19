@@ -8,25 +8,25 @@
 				</div>
 				<div class="popup-content">
 					<el-form label-width="80px">
-						<el-form-item label="画布宽度">
-							<el-input v-model="form.backgroundWidth"></el-input>
-						</el-form-item>
 						<el-form-item label="画布高度">
 							<el-input v-model="form.backgroundHeight"></el-input>
 						</el-form-item>
-						<el-form-item label="背景颜色">
-							<el-color-picker v-model="form.backgroundColor"></el-color-picker>
-						</el-form-item>
-						<el-form-item label="标尺">
-							<el-switch v-model="form.rulerVisibility" on-text="on" off-text="off">
-							</el-switch>
+						<el-form-item label="画布宽度">
+							<el-input v-model="form.backgroundWidth"></el-input>
 						</el-form-item>
 						<el-form-item label="网格">
 							<el-switch v-model="form.gridVisibility" on-text="on" off-text="off">
 							</el-switch>
 						</el-form-item>
+						<el-form-item label="标尺">
+							<el-switch v-model="form.rulerVisibility" on-text="on" off-text="off">
+							</el-switch>
+						</el-form-item>
 						<el-form-item label="网线颜色">
 							<el-color-picker v-model="form.gridColor"></el-color-picker>
+						</el-form-item>
+						<el-form-item label="背景颜色">
+							<el-color-picker v-model="form.backgroundColor"></el-color-picker>
 						</el-form-item>
 					</el-form>
 				</div>

@@ -100,7 +100,7 @@ const state = {
   // 线条类型
   strokeDashArray:"solid",
 
-  name:123,
+  name:'',
 
 }
 
@@ -221,7 +221,7 @@ const mutations = {
 
   },
   [types.SET_ATTRIBUTE_STROKE_DASH_ARRAY] (state, strokeDashArray) {
-    // state.strokeDashArray=strokeDashArray
+    state.strokeDashArray=strokeDashArray
   },
   // end TODO
 }

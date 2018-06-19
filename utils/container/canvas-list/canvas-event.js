@@ -34,9 +34,10 @@ var registerEvent = function (canvas, vueInstance) {
   // canvas 上对象移动的响应函数
   var objectMovingHandler = function (e) {
     var props = {
-      left:e.target.left,
-      top:e.target.top,
+      left:Math.round(e.target.left),
+      top:Math.round(e.target.top),
     }
+
     __that.$store.commit("SET_ATTRIBUTES", props)
   }
 
@@ -80,6 +81,23 @@ var registerEvent = function (canvas, vueInstance) {
     __that.$store.commit("SET_ATTRIBUTES", props)
     __that.$store.commit("SET_ATTR_DATA", attrData(obj))
 
+
+  }
+
+  //canvas 上对象放大
+  var objectScaling = function(e){
+    var t=e.target;
+    
+    // console.log(t)
+    
+    // var props = {
+    //   width:Math.round(t.cacheWidth),
+    //   height:Math.round(t.cacheHeight),
+    //   top:Math.round(t.top),
+    //   left:Math.round(t.left)
+    // }
+
+    // __that.$store.commit("SET_ATTRIBUTES", props)
   }
 
 
@@ -123,6 +141,7 @@ var registerEvent = function (canvas, vueInstance) {
     "object:selected":objectSelectedHandler,
     "object:modified":recordHistory,
     "object:removed":recordHistory,
+    "object:scaling":objectScaling,
     "mouse:move":mouseMoveHandler,
     "before:selection:cleared":beforeSelectionClearedHandler,
   })

@@ -390,9 +390,6 @@
         var val = parseInt(e.target.value)
         this.$store.commit("SET_ATTRIBUTE_STROKE_WIDTH", val)
       },
-      // setStrokeDashArray(e){
-      //   console.log(e)
-      // },
       setTextAlign:function (align) {
         this.$store.commit("SET_ATTRIBUTE_TEXT_ALIGN", align)
       },

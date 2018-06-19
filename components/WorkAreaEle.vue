@@ -806,7 +806,7 @@ export default {
       this.container.setAttribute("characterSpace", this.characterSpace)
     },
     textContent: function() {
-      console.log(this.textContent)
+      // console.log(this.textContent)
       this.container.setAttribute("text", this.textContent)
     },
     opacity: function() {
