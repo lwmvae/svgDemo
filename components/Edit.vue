@@ -19,7 +19,7 @@
         <ObrIcon size="12" type="jianqie"></ObrIcon><span class="span-has-leading-icon">剪切</span>
       </DropdownItem>
       <DropdownItem name='copy'>
-        <ObrIcon size="12" type="kaobei"></ObrIcon><span class="span-has-leading-icon">拷贝</span>
+        <ObrIcon size="12" type="kaobei"></ObrIcon><span class="span-has-leading-icon">复制</span>
       </DropdownItem>
       <DropdownItem name='paste'>
         <ObrIcon size="12" type="niantie"></ObrIcon><span class="span-has-leading-icon">粘贴</span>

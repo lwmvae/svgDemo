@@ -23,14 +23,14 @@ var gridLines = function(options) {
 		stroke: options.color,
 
 		// 网格线宽度
-        strokeWidth: 1,
+		strokeWidth: 1,
 
-        // 是否可以选中
-        selectable: false,
+    // 是否可以选中
+    selectable: false,
 
-        // 网格线的 pattern
-        strokeDashArray: [2, 2],
-	}
+    // 网格线的 pattern
+    strokeDashArray: [2, 2],
+  }
 
 	// 求出网格线数目
 	var	verticalNum = (options.x2 - options.x1) / options.interval
@@ -41,9 +41,9 @@ var gridLines = function(options) {
 		var x = i * options.interval + options.x1
 		var vertical = new fabric.Line([ x, options.y1, x, options.y2], lineParam)
 		if(i%5 === 0){
-        	vertical.set({strokeDashArray: null})
-      	}
-      	g.push(vertical)
+			vertical.set({strokeDashArray: null})
+		}
+		g.push(vertical)
 	}
 
 	// 生成水平方向的网格线
@@ -51,9 +51,9 @@ var gridLines = function(options) {
 		var y = i * options.interval + options.y1
 		var horizontal = new fabric.Line([ options.x1, y, options.x2, y], lineParam)
 		if(i % 5 === 0){
-        	horizontal.set({strokeDashArray: null})
-      	}
-      	g.push(horizontal)
+			horizontal.set({strokeDashArray: null})
+		}
+		g.push(horizontal)
 	}
 	return g
 }

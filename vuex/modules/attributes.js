@@ -61,7 +61,7 @@ const state = {
   textAlign:"left",
 
   // 字体
-  fontFamily:"yahei",
+  fontFamily:"Microsoft YaHei",
 
   // 粗体
   bold:false,
@@ -98,7 +98,7 @@ const state = {
 
   // TODO
   // 线条类型
-  strokeDashArray:"solid",
+  strokeDashArray:null,
 
   name:'',
 

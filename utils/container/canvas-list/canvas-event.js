@@ -88,14 +88,15 @@ var registerEvent = function (canvas, vueInstance) {
   var objectScaling = function(e){
     var t=e.target;
     
-    // console.log(t)
-    
-    // var props = {
-    //   width:Math.round(t.cacheWidth),
-    //   height:Math.round(t.cacheHeight),
-    //   top:Math.round(t.top),
-    //   left:Math.round(t.left)
-    // }
+    if(t==null) return;
+
+    console.log(t)
+    var props = {
+      // width:Math.round(t.cacheWidth),
+      // height:Math.round(t.cacheHeight-3),
+      top:Math.round(t.top),
+      left:Math.round(t.left)
+    }
 
     // __that.$store.commit("SET_ATTRIBUTES", props)
   }
@@ -141,7 +142,7 @@ var registerEvent = function (canvas, vueInstance) {
     "object:selected":objectSelectedHandler,
     "object:modified":recordHistory,
     "object:removed":recordHistory,
-    "object:scaling":objectScaling,
+    "mouse:up":objectScaling,
     "mouse:move":mouseMoveHandler,
     "before:selection:cleared":beforeSelectionClearedHandler,
   })

@@ -11,13 +11,13 @@
     </a>
     <DropdownMenu slot="list">
       <DropdownItem name='new'>
-        <ObrIcon size="12" type="xinjian"></ObrIcon><span class="span-has-leading-icon">新建</span>
+        <ObrIcon size="12" type="xinjian"></ObrIcon><span class="span-has-leading-icon">新建文件</span>
       </DropdownItem>
       <DropdownItem name='open'>
-        <ObrIcon size="12" type="dakai"></ObrIcon><span class="span-has-leading-icon">打开</span>
+        <ObrIcon size="12" type="dakai"></ObrIcon><span class="span-has-leading-icon">打开文件</span>
       </DropdownItem>
       <DropdownItem divided name="save">
-        <ObrIcon size="12" type="baocun"></ObrIcon><span class="span-has-leading-icon">保存</span>
+        <ObrIcon size="12" type="baocun"></ObrIcon><span class="span-has-leading-icon">保存文件</span>
       </DropdownItem>
       <DropdownItem name='saveAll'>
         <span class="span-no-leading-icon">全部保存</span>

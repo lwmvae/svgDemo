@@ -80,10 +80,10 @@
         </DropdownMenu>
       </Dropdown>
       <DropdownItem divided name="group">
-        <ObrIcon size="12" type="zuhe1"></ObrIcon><span class="span-has-leading-icon">组合</span>
+        <ObrIcon size="12" type="zuhe1"></ObrIcon><span class="span-has-leading-icon">合并元件</span>
       </DropdownItem>
       <DropdownItem name='ungroup'>
-        <ObrIcon size="12" type="fenzu"></ObrIcon><span class="span-has-leading-icon">拆分</span>
+        <ObrIcon size="12" type="fenzu"></ObrIcon><span class="span-has-leading-icon">拆分元件</span>
       </DropdownItem>
       <Dropdown placement="right-start">
         <DropdownItem>
@@ -91,7 +91,7 @@
         </DropdownItem>
         <DropdownMenu slot="list">
           <DropdownItem name='toFront'>
-            <span class="span-no-leading-icon">提到最上面</span>
+            <span class="span-no-leading-icon">移到最上</span>
           </DropdownItem>
           <DropdownItem name='moveUp'>
             <ObrIcon size="12" type="shangyiyiceng"></ObrIcon><span class="span-has-leading-icon">上移一层</span>
@@ -100,7 +100,7 @@
             <ObrIcon size="12" type="xiayiyiceng"></ObrIcon><span class="span-has-leading-icon">下移一层</span>
           </DropdownItem>
           <DropdownItem name='toBottom'>
-            <span class="span-no-leading-icon">放到最后面</span>
+            <span class="span-no-leading-icon">移到最下</span>
           </DropdownItem>
         </DropdownMenu>
       </Dropdown>

@@ -77,8 +77,8 @@
           <!-- TODO -->
           <FormItem label="线条形状" v-show="strokeDashArrayVisble">
             <Select size="small" :value="strokeDashArray" @on-change="setStrokeDashArray">
-              <Option value="solid">实线</Option>
-              <Option value="dash">虚线</Option>
+              <Option value="null">实线</Option>
+              <Option value="[2,2]">虚线</Option>
             </Select>
           </FormItem>
           <FormItem label="图层" v-show="layerVisble">
@@ -100,9 +100,10 @@
           </FormItem>
           <FormItem label="字体" v-show="fontFamilyVisble">
             <Select size="small" :value="fontFamily" @on-change="setFontFamily">
-              <Option value="song">宋体</Option>
-              <Option value="yahei">雅黑</Option>
-              <Option value="kaiti">楷体</Option>
+              <Option value="Microsoft YaHei">微软雅黑</Option>
+              <Option value="SimSun">宋体</Option>
+              <Option value="SimHei">黑体</Option>
+              <Option value="KaiTi">楷体</Option>
             </Select>
           </FormItem>
           <FormItem label="粗体" v-show="boldVisble">
@@ -433,7 +434,7 @@
         this.$store.commit("SET_ATTRIBUTE_LAYER", layer)
       },
       setStrokeDashArray:function (val) {
-        // console.log(val);
+        
         this.$store.commit("SET_ATTRIBUTE_STROKE_DASH_ARRAY", val)
       },
     },
