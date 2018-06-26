@@ -89,16 +89,15 @@ var registerEvent = function (canvas, vueInstance) {
     var t=e.target;
     
     if(t==null) return;
-
-    console.log(t)
+    // console.log(t.cacheWidth)
     var props = {
-      // width:Math.round(t.cacheWidth),
-      // height:Math.round(t.cacheHeight-3),
+      cacheWidth:Math.round(t.cacheWidth),
+      cacheHeight:Math.round(t.cacheHeight),
       top:Math.round(t.top),
       left:Math.round(t.left)
     }
 
-    // __that.$store.commit("SET_ATTRIBUTES", props)
+    __that.$store.commit("SET_ATTRIBUTES", props)
   }
 
 

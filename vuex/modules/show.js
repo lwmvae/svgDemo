@@ -11,10 +11,10 @@ const state = {
   top:false,
 
   // 高度编辑框
-  height:false,
+  cacheHeight:false,
 
   // 宽度编辑框
-  width:false,
+  cacheWidth:false,
 
   // 角度编辑框
   angle:false,

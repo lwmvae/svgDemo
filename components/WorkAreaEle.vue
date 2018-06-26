@@ -633,8 +633,8 @@ export default {
 
       left: state=>state.attributes.left,
       top: state=>state.attributes.top,
-      height: state=>state.attributes.height,
-      width: state=>state.attributes.width,
+      cacheHeight: state=>state.attributes.cacheHeight,
+      cacheWidth: state=>state.attributes.cacheWidth,
       angle: state=>state.attributes.angle,
       length: state=>state.attributes.length,
       radius: state=>state.attributes.radius,
@@ -767,13 +767,13 @@ export default {
       let val=Math.round(this.top)
       this.container.setAttribute("top", val)
     },
-    height: function() {
-      let val=Math.round(this.height)
-      this.container.setAttribute("height",val)
+    cacheHeight: function() {
+      let val=Math.round(this.cacheHeight)
+      this.container.setAttribute("cacheHeight",val)
     },
-    width: function() {
-      let val=Math.round(this.width)
-      this.container.setAttribute("width", val)
+    cacheWidth: function() {
+      let val=Math.round(this.cacheWidth)
+      this.container.setAttribute("cacheWidth", val)
     },
     angle: function() {
       this.container.setAttribute("angle", this.angle)

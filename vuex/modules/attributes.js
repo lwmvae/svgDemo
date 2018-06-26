@@ -12,10 +12,10 @@ const state = {
   top:0,
 
   // 高度
-  height:0,
+  cacheHeight:0,
 
   // 宽度
-  width:0,
+  cacheWidth:0,
 
   // 角度
   angle:0,
@@ -111,11 +111,11 @@ const mutations = {
   [types.SET_ATTRIBUTE_TOP] (state, top) {
     state.top = top
   },
-  [types.SET_ATTRIBUTE_HEIGHT] (state, height) {
-    state.height = height
+  [types.SET_ATTRIBUTE_HEIGHT] (state, cacheHeight) {
+    state.cacheHeight = cacheHeight
   },
-  [types.SET_ATTRIBUTE_WIDTH] (state, width) {
-    state.width = width
+  [types.SET_ATTRIBUTE_WIDTH] (state, cacheWidth) {
+    state.cacheWidth = cacheWidth
   },
   [types.SET_ATTRIBUTE_ANGLE] (state, angle) {
     state.angle = angle
