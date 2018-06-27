@@ -65,7 +65,7 @@ var registerEvent = function (canvas, vueInstance) {
   var objectSelectedHandler = function(e) {
 
     var t = e.target
-    // console.log(t)
+    console.log(t)
     if (t.type === 'group') {
       customizeGroup(t)
     }
@@ -74,6 +74,7 @@ var registerEvent = function (canvas, vueInstance) {
     var ops = visibility[t.obrType]
     var props = utils.copy(t, ops)
     // console.log(props)
+    props.angle=Math.round(props.angle);
     var obj=canvas.owner.saveAttr.addAttr[t.name]
 
     __that.$store.commit("SET_TREE_TITLE", treeTitle)
@@ -85,7 +86,7 @@ var registerEvent = function (canvas, vueInstance) {
   }
 
   //canvas 上对象放大
-  var objectScaling = function(e){
+  var mouseUp = function(e){
     var t=e.target;
     
     if(t==null) return;
@@ -141,7 +142,7 @@ var registerEvent = function (canvas, vueInstance) {
     "object:selected":objectSelectedHandler,
     "object:modified":recordHistory,
     "object:removed":recordHistory,
-    "mouse:up":objectScaling,
+    "mouse:up":mouseUp,
     "mouse:move":mouseMoveHandler,
     "before:selection:cleared":beforeSelectionClearedHandler,
   })

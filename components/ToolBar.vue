@@ -114,32 +114,32 @@
 		<div class="toolContainer">
 			<!-- TODO -->
 			<ButtonGroup size="small">
-				<Button title="文字加粗">
+				<Button title="文字加粗" @click="textEditSignal('bold')">
 					<ObrIcon type="jiacub"></ObrIcon>
 				</Button>
-				<Button title="文字倾斜">
+				<Button title="文字倾斜" @click="textEditSignal('italic')">
 					<ObrIcon type="xietii"></ObrIcon>
 				</Button>
-				<Button title="文字左对齐">
+				<Button title="文字左对齐" @click="textEditSignal('textLeft')">
 					<ObrIcon type="zuoduiqi1"></ObrIcon>
 				</Button>
-				<Button title="文字居中对齐">
+				<Button title="文字居中对齐" @click="textEditSignal('textCenter')">
 					<ObrIcon type="zhongduiqi"></ObrIcon>
 				</Button>
-				<Button title="文字右对齐">
+				<Button title="文字右对齐" @click="textEditSignal('textRight')">
 					<ObrIcon type="youduiqi1"></ObrIcon>
 				</Button>
-				<Button title="文字颜色">
+				<Button title="文字颜色" @click="textEditSignal('textColor')">
 					<ObrIcon type="wenziyanse"></ObrIcon>
 				</Button>
 			</ButtonGroup>
 
 			<!-- TODO -->
 			<ButtonGroup size="small">
-				<Button title="填充色">
+				<Button title="填充色" @click="textEditSignal('stroke')">
 					<ObrIcon type="tianchongse"></ObrIcon>
 				</Button>
-				<Button title="线条颜色">
+				<Button title="线条颜色" @click="textEditSignal('lineColor')">
 					<ObrIcon type="xiantiaoyanse"></ObrIcon>
 				</Button>
 			</ButtonGroup>
@@ -226,6 +226,7 @@
 				editSignal: 'EDIT_SIGNAL',
 				arrangeSignal: 'ARRANGE_SIGNAL',
 				sceneSignal: 'SCENE_SIGNAL',
+				textEditSignal:'TEXT_EDIT_SINGAL'
 			})
 		}
 	}

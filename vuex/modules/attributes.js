@@ -98,7 +98,7 @@ const state = {
 
   // TODO
   // 线条类型
-  strokeDashArray:null,
+  strokeDashArray:'null',
 
   name:'',
 

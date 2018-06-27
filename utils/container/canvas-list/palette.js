@@ -189,7 +189,8 @@ class Palette {
 		num=this.vue.$store.state.nameNum[o.obrType];
 		
 		o.name=o.obrType+num
-		
+		// o.strokeDashArray=null
+		// console.log(o)
 		this.canvas.add(o)
 
 		// console.log(this.canvas)

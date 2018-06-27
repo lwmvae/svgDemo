@@ -138,7 +138,7 @@ export default {
       tabs:[],
 
       // id 后缀
-      num:0,
+      num:1,
 
       // prefix + tab.id 是container中canvas和file的唯一标识
       prefix:'tab',
@@ -864,7 +864,7 @@ export default {
       this.container.setAttribute("layer", this.layer)
     },
     strokeDashArray: function() {
-      // console.log(this.strokeDashArray)
+      console.log(typeof this.strokeDashArray)
       // this.container.setAttribute("strokeDashArray", this.strokeDashArray)
     },
     

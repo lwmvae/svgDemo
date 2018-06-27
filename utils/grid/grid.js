@@ -43,6 +43,7 @@ var gridLines = function(options) {
 		if(i%5 === 0){
 			vertical.set({strokeDashArray: null})
 		}
+		// console.log(vertical)
 		g.push(vertical)
 	}
 

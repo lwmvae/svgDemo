@@ -92,10 +92,10 @@
 
           <FormItem label="对齐方式" v-show="textAlignVisble">
             <Select size="small" :value="textAlign" @on-change="setTextAlign">
-              <Option value="left">left</Option>
-              <Option value="middle">middle</Option>
-              <Option value="right">right</Option>
-              <Option value="justify">justify</Option>
+              <Option value="left">左对齐</Option>
+              <Option value="middle">居中对齐</Option>
+              <Option value="right">右对齐</Option>
+              <!-- <Option value="justify">justify</Option> -->
             </Select>
           </FormItem>
           <FormItem label="字体" v-show="fontFamilyVisble">
@@ -434,8 +434,7 @@
         this.$store.commit("SET_ATTRIBUTE_LAYER", layer)
       },
       setStrokeDashArray:function (val) {
-        
-        this.$store.commit("SET_ATTRIBUTE_STROKE_DASH_ARRAY", val)
+        // this.$store.commit("SET_ATTRIBUTE_STROKE_DASH_ARRAY", val)
       },
     },
     watch:{

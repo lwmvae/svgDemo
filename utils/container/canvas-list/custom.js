@@ -27,6 +27,7 @@ var customProperties = [
 	'radius', 
 	'startAngle', 
 	'endAngle',
+	'strokeDashArray'
 ]
 
 // @klass object：SVGEditor 中引用的 fabric的类
