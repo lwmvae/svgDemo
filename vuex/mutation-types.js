@@ -69,9 +69,9 @@ export const SCENE_SIGNAL = 'SCENE_SIGNAL'
 // Arrange.vue component mutations-types
 export const ARRANGE_SIGNAL = 'ARRANGE_SIGNAL'
 
-//textEdit.js
-export const TEXT_EDIT_SINGAL = 'TEXT_EDIT_SINGAL'
 
+// textEdit.js
+export const TEXT_EDIT_SINGAL = 'TEXT_EDIT_SINGAL'
 
 // config.js
 // export const SET_CANVAS_WIDTH = 'SET_CANVAS_WIDTH'

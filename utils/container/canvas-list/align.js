@@ -9,39 +9,39 @@ var _doUpdate = function(palette, update) {
 
 	// 获取 tempGroup
 	var a = c.getActiveGroup()
-    if (a && a.type === 'group') {
-    	// 获取 tempGroup 中的对象
-        var items = a._objects
-        a._restoreObjectsState()
+	if (a && a.type === 'group') {
+    // 获取 tempGroup 中的对象
+    var items = a._objects
+    a._restoreObjectsState()
 
-        // 锁住 操作历史 的记录
-        h.lock()
+    // 锁住 操作历史 的记录
+    h.lock()
 
-        // 删除 tempGroup
-        c.remove(a)
+    // 删除 tempGroup
+    c.remove(a)
 
-        // 更新对象的位置
-        update(items)
+    // 更新对象的位置
+    update(items)
 
-        // 生成新的 tempGroup
-        items.forEach(function(item) {
-            item.hasControls = true
-            item.setCoords()
-        })
-        var group = new fabric.Group(items, {
-            originX: 'center',
-            originY: 'center',
-        })
-        c._activeObject = null
-        group['canvas'] = c
-        c.setActiveGroup(group.setCoords()).renderAll()
+    // 生成新的 tempGroup
+    items.forEach(function(item) {
+    	item.hasControls = true
+    	item.setCoords()
+    })
+    var group = new fabric.Group(items, {
+    	originX: 'center',
+    	originY: 'center',
+    })
+    c._activeObject = null
+    group['canvas'] = c
+    c.setActiveGroup(group.setCoords()).renderAll()
 
-        // 解锁 操作历史 的记录
-        h.unlock()
+    // 解锁 操作历史 的记录
+    h.unlock()
 
-        // 记录 操作历史
-        h.add(JSON.stringify(c))
-    }
+    // 记录 操作历史
+    h.add(JSON.stringify(c))
+  }
 }
 
 

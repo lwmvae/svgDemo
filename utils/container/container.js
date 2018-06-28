@@ -82,6 +82,8 @@ var Container = function(vueInstance, idPrefix) {
         this.canvasList.setAttribute(attribute, value)
     }
 
+    
+
     // @path string：文件路径
     // @paletteId string：目标 画布 对象的索引
     // @return object：文件路径、文件名和后缀等信息

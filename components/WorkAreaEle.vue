@@ -573,7 +573,8 @@ export default {
       setRightShow:'SET_RIGHT_SHOW',
       setShowConfig:'SET_SHOW_CONFIG',
       setScrollTop:'SET_SCROLL_TOP',
-      setScrollLeft:'SET_SCROLL_LEFT'
+      setScrollLeft:'SET_SCROLL_LEFT',
+      setAttributes:'SET_ATTRIBUTES'
     })
 
   },
@@ -705,6 +706,12 @@ export default {
       zoomIn: state=>state.scene.zoomIn,
       zoomOut: state=>state.scene.zoomOut,
       zoomOri: state=>state.scene.zoomOri,
+
+      textBold: state=>state.textEdit.textBold,
+      textItalic: state=>state.textEdit.textItalic,
+      textLeft: state=>state.textEdit.textLeft,
+      textCenter: state=>state.textEdit.textCenter,
+      textRight: state=>state.textEdit.textRight,
 
 
       arrangeSignal: state => state.arrange.signal,
@@ -864,10 +871,32 @@ export default {
       this.container.setAttribute("layer", this.layer)
     },
     strokeDashArray: function() {
-      console.log(typeof this.strokeDashArray)
+      // console.log(typeof this.strokeDashArray)
       // this.container.setAttribute("strokeDashArray", this.strokeDashArray)
     },
-    
+
+    textBold(){
+      let val=!this.bold;
+      this.setAttributes({bold:val})
+      this.container.setTextAttribute("bold", val)
+    },
+    textItalic(){
+      let val=!this.italic;
+      this.setAttributes({italic:val})
+      this.container.setTextAttribute("italic", val)
+    },
+    textBold(){
+      this.setAttributes({bold:val})
+      this.container.setTextAttribute("bold", val)
+    },
+    textBold(){
+      this.setAttributes({bold:val})
+      this.container.setTextAttribute("bold", val)
+    },
+    textBold(){
+      this.setAttributes({bold:val})
+      this.container.setTextAttribute("bold", val)
+    },
 
 
     // 响应 File.vue 组件的动作

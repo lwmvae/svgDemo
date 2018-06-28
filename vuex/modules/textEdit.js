@@ -4,10 +4,10 @@ import * as types from '../mutation-types'
 
 const state = {
   // 文字加粗
-  bold:0,
+  textBold:0,
 
   // 文字斜体
-  italic:0,
+  textItalic:0,
 
   // 文字左对齐
   textLeft:0,
@@ -18,13 +18,13 @@ const state = {
   // 文字右对齐
   textRight:0,
 
-  // 文字颜色
-  textColor:0,
+  // 文字背景颜色
+  textbgColor:0,
 
-  // 填充色
-  stroke:0,
+  // 文字填充色
+  textStroke:0,
 
-  // 线条颜色
+  // 文字线条颜色
   lineColor:0,
 }
 

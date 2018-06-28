@@ -114,33 +114,37 @@
 		<div class="toolContainer">
 			<!-- TODO -->
 			<ButtonGroup size="small">
-				<Button title="文字加粗" @click="textEditSignal('bold')">
+				<Button title="文字加粗" @click="setEditSignal('textBold')">
 					<ObrIcon type="jiacub"></ObrIcon>
 				</Button>
-				<Button title="文字倾斜" @click="textEditSignal('italic')">
+				<Button title="文字倾斜" @click="setEditSignal('textItalic')">
 					<ObrIcon type="xietii"></ObrIcon>
 				</Button>
-				<Button title="文字左对齐" @click="textEditSignal('textLeft')">
+				<Button title="文字左对齐" @click="setEditSignal('textLeft')">
 					<ObrIcon type="zuoduiqi1"></ObrIcon>
 				</Button>
-				<Button title="文字居中对齐" @click="textEditSignal('textCenter')">
+				<Button title="文字居中对齐" @click="setEditSignal('textCenter')">
 					<ObrIcon type="zhongduiqi"></ObrIcon>
 				</Button>
-				<Button title="文字右对齐" @click="textEditSignal('textRight')">
+				<Button title="文字右对齐" @click="setEditSignal('textRight')">
 					<ObrIcon type="youduiqi1"></ObrIcon>
 				</Button>
-				<Button title="文字颜色" @click="textEditSignal('textColor')">
+				<!-- TODO -->
+				<Button title="文字背景色">
+					<input type="color" class="color" :value="textBackgroundColor" @change="setTextBackgroundColor">
 					<ObrIcon type="wenziyanse"></ObrIcon>
 				</Button>
+				<!-- TODO END -->
 			</ButtonGroup>
 
-			<!-- TODO -->
 			<ButtonGroup size="small">
-				<Button title="填充色" @click="textEditSignal('stroke')">
-					<ObrIcon type="tianchongse"></ObrIcon>
-				</Button>
-				<Button title="线条颜色" @click="textEditSignal('lineColor')">
+				<Button title="线条颜色">
+					<input type="color" class="color" :value="stroke" @change="setStroke">
 					<ObrIcon type="xiantiaoyanse"></ObrIcon>
+				</Button>
+				<Button title="填充色">
+					<input type="color" class="color" :value="fill" @change="setFill">
+					<ObrIcon type="tianchongse"></ObrIcon>
 				</Button>
 			</ButtonGroup>
 
@@ -163,7 +167,7 @@
 </template>
 <script>
 	import ObrIcon from './ObrIcon'
-	import { mapMutations } from 'vuex'
+	import { mapMutations,mapState } from 'vuex'
 	export default {
 		name: 'toolbar',
 		components: {
@@ -171,6 +175,16 @@
 		},
 		data() {
 			return {}
+		},
+		computed:{
+			...mapState({
+				bold: state=>state.attributes.bold,
+        italic: state=>state.attributes.italic,
+        textBackgroundColor:state=>state.attributes.textBackgroundColor,
+
+				stroke: state=>state.attributes.stroke,
+        fill: state=>state.attributes.fill,
+			})
 		},
 		mounted(){
 			var that=this;
@@ -221,12 +235,35 @@
 			})
 		},
 		methods: {
+			setBold(){
+				let val=!this.bold;
+				console.log(val)
+				this.setAttributes({bold:val})
+				// this.$store.commit("SET_ATTRIBUTE_BOLD", val)
+			},
+			setItalic(){
+				let val=!this.italic;
+				this.$store.commit("SET_ATTRIBUTE_ITALIC", val)
+			},
+			setTextAlign(val){
+				this.$store.commit("SET_ATTRIBUTE_TEXT_ALIGN", val)
+			},
+      setTextBackgroundColor(e) {
+        this.$store.commit("SET_ATTRIBUTE_TEXT_BACKGROUND_COLOR", e.target.value)
+      },
+      setStroke(e) {
+        this.$store.commit("SET_ATTRIBUTE_STROKE", e.target.value)
+      },
+      setFill(e) {
+        this.$store.commit("SET_ATTRIBUTE_FILL", e.target.value)
+      },
 			...mapMutations({
 				fileSignal: 'FILE_SIGNAL',
 				editSignal: 'EDIT_SIGNAL',
 				arrangeSignal: 'ARRANGE_SIGNAL',
 				sceneSignal: 'SCENE_SIGNAL',
-				textEditSignal:'TEXT_EDIT_SINGAL'
+				setAttributes:'SET_ATTRIBUTES',
+				setEditSignal:'TEXT_EDIT_SINGAL'
 			})
 		}
 	}
@@ -275,5 +312,14 @@
 
 .ivu-form {
 	padding-left: 3px;
+}
+
+.color{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left:0;
+	top:0;
+	opacity: 0;
 }
 </style>

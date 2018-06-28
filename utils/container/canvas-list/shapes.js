@@ -9,6 +9,7 @@ var _shapes = function () {
 	// var top = 50
 	var stroke = "#ffffff"
 	var fill = "#808080"
+	var bold = false
 	var height = 77
 	var width = 117
 	var padding = 5
@@ -113,6 +114,7 @@ var _shapes = function () {
 			stroke: stroke, 
 			textBackgroundColor: textBackgroundColor, 
 			fill: fill,
+			bold:bold,
 			textContent:'edit',
 			obrType: 'iText',
 		})
