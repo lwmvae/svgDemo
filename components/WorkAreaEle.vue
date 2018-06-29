@@ -878,24 +878,12 @@ export default {
     textBold(){
       let val=!this.bold;
       this.setAttributes({bold:val})
-      this.container.setTextAttribute("bold", val)
+      // this.container.setTextAttribute("bold", val)
     },
     textItalic(){
       let val=!this.italic;
       this.setAttributes({italic:val})
-      this.container.setTextAttribute("italic", val)
-    },
-    textBold(){
-      this.setAttributes({bold:val})
-      this.container.setTextAttribute("bold", val)
-    },
-    textBold(){
-      this.setAttributes({bold:val})
-      this.container.setTextAttribute("bold", val)
-    },
-    textBold(){
-      this.setAttributes({bold:val})
-      this.container.setTextAttribute("bold", val)
+      // this.container.setTextAttribute("italic", val)
     },
 
 
