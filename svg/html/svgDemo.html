@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>demo</title>
+	<style type="text/css">
+		*{
+			margin: 0;padding: 0
+		}
+		#myDrawing{
+			margin:50px;
+			/*width: 1000px;height: 600px;overflow: auto;*/
+		}
+	</style>
+	<link rel="stylesheet" type="text/css" href="../js/svg.select.css">
+</head>
+<body>
+	<div id="myDrawing"></div>
+</body>
+<script type="text/javascript" src="../js/svg.js"></script>
+<script type="text/javascript" src="../js/svg.draw.js"></script>
+<script type="text/javascript" src="../js/svg.select.js"></script>
+<script type="text/javascript" src="../js/svg.resize.js"></script>
+<script type="text/javascript" src="../js/svg.draggable.js"></script>
+<script type="text/javascript" src="../js/svg.selectShapes.js"></script>
+<script type="text/javascript" src="../js/svg.selectArea.js"></script>
+
+<script type="text/javascript">
+	var draw = SVG('myDrawing').size(1300, 800);
+	var rect = draw.rect(100,100).move(100, 50).fill('#dfdfdf');
+	var circle = draw.circle(100).move(250, 150).fill('#999');
+	var rect1 = draw.rect(50,50).move(450, 150).fill('#dfdfdf');
+	var circle1 = draw.circle(50).move(400, 50).fill('#999');
+
+	var group=draw.group();
+	group.add(rect1);
+	group.add(circle1);
+	var point=group.bbox()
+	console.log(point)
+	var rect2=draw.rect(point.w,point.h).move(point.x,point.y);
+	// rect2.add(rect1)
+	// rect2.add(circle1)
+
+	// draw.selected(false)
+	draw.selectArea(false).selected(false)
+
+// var box1 = draw.rect(100,100).move(50,50).bbox()
+// var box2 = draw.rect(100,100).move(50,200).bbox()
+// var box3 = box1.merge(box2)
+
+// box3.selectize().resize().draggable();
+// console.log(box3)
+
+</script>
+</html>
