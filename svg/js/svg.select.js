@@ -26,7 +26,7 @@
       r: [ 'width', 'height / 2' ],
       b: [ 'width / 2', 'height' ],
       l: [ 0, 'height / 2' ]
-    };9
+    };
 
     // helper function to evaluate point coordinates based on settings above and an object (bbox in our case)
     this.pointCoord = function (setting, object) {
@@ -142,6 +142,7 @@ SelectHandler.prototype.getPointArray = function () {
   var bbox = this.el.bbox();
 
   return this.el.array().valueOf().map(function (el) {
+    console.log(el[0] - bbox.x, el[1] - bbox.y)
     return [el[0] - bbox.x, el[1] - bbox.y];
   });
 };
@@ -398,7 +399,7 @@ SVG.extend(SVG.Element, {
     var selectHandler = this.remember('_selectHandler') || new SelectHandler(this);
 
     selectHandler.init(value === undefined ? true : value, options || {});
-    console.log(this)
+    // console.log(this)
     return this;
 
   }

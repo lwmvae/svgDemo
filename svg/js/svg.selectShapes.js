@@ -17,15 +17,18 @@
 			return;
 		}
 		this.el.on('mousedown',function(e){
-			// console.log(e.target)
+			// console.log(e.target.instance)
 			this.each(function(){
+				// console.log(this)
 				if(this._memory){
 					this.selectize(false).resize(false).draggable(false);
 				}
 			})
+
 			if(e.target.instance!=this){
 				e.target.instance.selectize().resize().draggable();
 			}
+
 		},false)
 
 	}
