@@ -1,32 +1,13 @@
-SVG.Rect = SVG.invent({
-  // Initialize node
-  create: 'rect'
+var draw = SVG('myDrawing').size(1300, 800);
 
-  // Inherit from
-, inherit: SVG.Shape
-
-  // Add parent method
-, construct: {
-    // Create a rect element
-    rect: function(width, height) {
-      return this.put(new SVG.Rect()).size(width, height)
+//左键点击选中单个shapes
+draw.on('mousedown',function(e){
+  this.each(function(){
+    if(this._memory){
+      this.selectize(false).resize(false).draggable(false);
     }
-  }
-})
-
-
-SVG.Rects = SVG.invent({
-  // Initialize node
-  create: 'rects'
-
-  // Inherit from
-, inherit: SVG.Shape
-
-  // Add parent method
-, construct: {
-    // Create a rect element
-    rects: function(width, height) {
-      return this.put(new SVG.Rects()).size(width, height)
-    }
+  })
+  if(e.target.instance!=this){
+    e.target.instance.selectize().resize().draggable();
   }
 })

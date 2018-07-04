@@ -105,8 +105,10 @@
 
     this.parent = this.el.parent();
     this.nested = (this.nested || this.parent.group());
+
     this.nested.matrix(new SVG.Matrix(this.el).translate(bbox.x, bbox.y));
 
+ 
     // When deepSelect is enabled and the element is a line/polyline/polygon, draw only points for moving
     if (this.options.deepSelect && ['line', 'polyline', 'polygon'].indexOf(this.el.type) !== -1) {
       this.selectPoints(value);
@@ -142,7 +144,7 @@ SelectHandler.prototype.getPointArray = function () {
   var bbox = this.el.bbox();
 
   return this.el.array().valueOf().map(function (el) {
-    console.log(el[0] - bbox.x, el[1] - bbox.y)
+    
     return [el[0] - bbox.x, el[1] - bbox.y];
   });
 };
@@ -282,12 +284,14 @@ SelectHandler.prototype.selectRect = function (value) {
       .attr('class', _this.options.classPoints + '_' + point)
       .on(mname, getMoseDownFunc(point))
       .on(ename, getMoseDownFunc(point));
+
       _this.rectSelection.set.add(pointElement);
     });
 
     this.rectSelection.set.each(function () {
       this.addClass(_this.options.classPoints);
     });
+
   }
 
   // draw rotationPint, if enabled

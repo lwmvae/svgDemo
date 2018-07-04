@@ -8,7 +8,8 @@
 			margin: 0;padding: 0
 		}
 		#myDrawing{
-			/*margin:50px;*/
+			margin:50px;
+			background-color: rgba(100,100,100,0.1);
 			/*width: 1000px;height: 600px;overflow: auto;*/
 		}
 	</style>
@@ -39,25 +40,16 @@
 	// var point=group.bbox()
 	// var rect2=draw.rect(point.w,point.h).move(point.x,point.y).fill('rgba(255,255,255,0)')
 
-	// var nested = draw.nested()
-	// var rect3 = nested.rect(200, 200)
-	// var circle3=nested.circle(50).move(200,200)
+// 	var nested = draw.nested()
+// 	var rect3 = nested.rect(200, 200)
+// 	var circle3=nested.circle(50).move(200,200)
 // console.log(rect.bbox())	
-draw.selectArea(false).selected(false)
-// var box3=rect1.bbox().merge(circle1.bbox());
-// var symbol = draw.symbol()
-// symbol.rect(50,50).move(450, 150).fill('#dfdfdf');
-// symbol.circle(50).move(400, 50).fill('#999');
-// console.log(box3)
-// var use  = draw.use(symbol).move(box3.x,box3.y)
 
 
-// var box1 = draw.rect(100,100).move(50,50).bbox()
-// var box2 = draw.rect(100,100).move(50,200).bbox()
-// var box3 = box1.merge(box2)
 
-// box3.selectize().resize().draggable();
-// console.log(box3)
+draw.selected(false)
 
+
+draw.selectArea(false)
 </script>
 </html>
