@@ -9,10 +9,14 @@
  		this.el=el
 
  		this.drawDashArea=undefined
- 		// 传入参数
- 		this.flag=false;
- 		//鼠标坐标
- 		this.points={}
+ 		// 是否有选中的图形
+ 		this.activeShapes=false;
+ 		
+ 		this.OFFSETLEFT=this.el.parent().offsetLeft;
+ 		this.OFFSETTOP=this.el.parent().offsetTop;
+ 		
+ 		//记录鼠标开始和结束的坐标
+ 		this.points={};
  	}
 
  	SelectAreaHandler.prototype.init=function(val){
@@ -22,51 +26,70 @@
  			return;
  		}
 
- 		const OFFSETLEFT=_this.el.parent().offsetLeft;
- 		const OFFSETTOP=_this.el.parent().offsetTop;
+ 		this.el.on('mousedown',function(e){ _this.down(e) })
+ 
+ 		// this.el.on('mouseup',function(e){ _this.move(e) })
 
- 		this.el.on('mousedown',function(e){
- 		
- 			this.flag=true
-			_this.points.x=e.pageX-OFFSETLEFT;
-			_this.points.y=e.pageY-OFFSETTOP;
-			
-			// console.log(_this.points.x)
+ 		window.addEventListener('mouseup',function(e){ _this.up(e) },false)
+ 	
+ 	}
+ 	SelectAreaHandler.prototype.down=function(e){
+ 		//鼠标左键点击
+ 		if(e.button==0){
+ 			this.el.each(function(){
+ 				if(this._memory){
+ 					this.selectize(false).resize(false).draggable(false);
+ 				}
+ 			})
+ 			// console.log(e.target.instance.parent().type=='g')
 
-			this.drawDashArea=this.rect();
-			this.drawDashArea.draw(e).fill('rgba(6,117,234,0.3)')
+ 			if(e.target.instance!=this.el){
+ 				this.activeShapes=true;
+ 				if(e.target.instance.parent().type=='g'){
+	 				e.target.instance.parent().selectize().resize().draggable();
+ 				}else{
+	 				e.target.instance.selectize().resize().draggable();
+ 				}
+ 			}else{
+ 				this.activeShapes=false;
+ 			}
+ 			
+ 			
+ 		}else if(e.button==2){//右键点击
+ 			e.stopPropagation()
+ 		}
 
-		},false)
+ 		if(!this.activeShapes){
+ 			this.points.x=e.pageX-this.OFFSETLEFT;
+ 			this.points.y=e.pageY-this.OFFSETTOP;
 
- 		this.el.on('mouseup',function(e){
- 			this.flag=false
- 		},false)
+ 			this.drawDashArea=this.el.rect();
+ 			this.drawDashArea.draw(e).fill('rgba(6,117,234,0.3)')
+ 		}
+ 	}
+ 	SelectAreaHandler.prototype.move=function(e){
 
- 		window.addEventListener('mouseup',function(e){
- 			this.flag=false
-			_this.el.drawDashArea.draw('stop',e);
-			_this.el.drawDashArea.remove();
-			
-			// console.log(_this.el.children())
+ 	}
+ 	SelectAreaHandler.prototype.up=function(e){
+ 			// console.log(this.activeShapes)
+ 		if(!this.activeShapes){
+ 			
+ 			this.drawDashArea.draw('stop',e);
+			this.drawDashArea.remove();
 
-			_this.points.x2=e.pageX-OFFSETLEFT;
-			_this.points.y2=e.pageY-OFFSETTOP;
-			
-			// console.log(_this.points)
-			var containArr=_this.cacl(_this.el.children());
-			_this.selectShapes(containArr)
-		
-		},false)
+			this.points.x2=e.pageX-this.OFFSETLEFT;
+			this.points.y2=e.pageY-this.OFFSETTOP;
+
+			var containArr=this.cacl(this.el.children());
+			this.selectShapes(containArr)
+		}
  	}
  	//选中鼠标划过区域所有的节点
  	SelectAreaHandler.prototype.selectShapes=function(arr){
  		if(arr.length==0){
  			return;
  		}else{
- 			arr.forEach(function(e){
- 				e.selectize()
- 			})
-
+ 			console.log(arr)
  		}
  	}
  	SelectAreaHandler.prototype.getPoints=function(arr){

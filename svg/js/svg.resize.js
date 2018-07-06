@@ -58,6 +58,7 @@
           this.options[i] = options[i];
         }
       }
+      // console.log(this.options)
 
       // We listen to all these events which are specifying different edges
       this.el.on('lt.resize', function(e){ _this.resize(e || window.event); });  // Left-Top
@@ -118,6 +119,29 @@
       if (this.el.type === "text") {
         this.parameters.fontSize = this.el.attr()["font-size"];
       }
+      // console.log(this.parameters)
+      if(this.el.type === "g"){
+        var _this=this;
+        this.parameters.transform=this.el.transform()
+        this.parameters.childBox=[];
+        this.el.each(function(){
+          _this.parameters.childBox.push(this.bbox())
+        })
+        this.parameters.abbox=absolute(this.parameters.box,this.parameters.childBox)
+        // console.log(this.parameters.box)
+        // console.log(this.parameters.childBox)
+      }
+
+      function absolute(box,childBox){
+        var abbox=[];
+        for(let i=0;i<childBox.length;i++){
+          var obj={};
+          obj.ax=childBox[i].x-box.x
+          obj.ay=childBox[i].y-box.y
+          abbox.push(obj)
+        }
+        return abbox;
+      }
 
       // the i-param in the event holds the index of the point which is moved, when using `deepSelect`
       if (event.detail.i !== undefined) {
@@ -157,7 +181,24 @@
                 return;
               }
 
-              this.el.move(this.parameters.box.x + snap[0], this.parameters.box.y + snap[1]).size(this.parameters.box.width - snap[0], this.parameters.box.height - snap[1]);
+              if(this.parameters.type === "g"){
+                var multipleW=snap[0]/this.parameters.box.width;
+                var multipleH=snap[1]/this.parameters.box.height;
+                var childArr=this.el.children()
+                for(let i=0;i<childArr.length;i++){
+                  let ax=this.parameters.childBox[i].x-(multipleW*this.parameters.abbox[i].ax)
+                  let ay=this.parameters.childBox[i].y-(multipleH*this.parameters.abbox[i].ay)
+                  let w=this.parameters.childBox[i].width*(1-multipleW)
+                  let h=this.parameters.childBox[i].height*(1-multipleH)
+                  // console.log(ax,ay,w,h)
+                  childArr[i].move(ax,ay).size(w,h)
+                }
+                this.el.matrix(this.parameters.transform).transform({x:snap[0],y:snap[1]},true).size(this.parameters.box.width - snap[0], this.parameters.box.height - snap[1]);
+
+              }else{
+                this.el.move(this.parameters.box.x + snap[0], this.parameters.box.y + snap[1]).size(this.parameters.box.width - snap[0], this.parameters.box.height - snap[1]);
+              }
+
             }
           };
           break;
@@ -174,7 +215,25 @@
                 return;
               }
 
-              this.el.move(this.parameters.box.x, this.parameters.box.y + snap[1]).size(this.parameters.box.width + snap[0], this.parameters.box.height - snap[1]);
+              if(this.parameters.type === "g"){
+                var multipleW=snap[0]/this.parameters.box.width;
+                var multipleH=snap[1]/this.parameters.box.height;
+                var childArr=this.el.children()
+                for(let i=0;i<childArr.length;i++){
+                  let ax=this.parameters.childBox[i].x+(multipleW*this.parameters.abbox[i].ax)
+                  let ay=this.parameters.childBox[i].y-(multipleH*this.parameters.abbox[i].ay)
+                  let w=this.parameters.childBox[i].width*(1+multipleW)
+                  let h=this.parameters.childBox[i].height*(1-multipleH)
+
+                  childArr[i].move(ax,ay).size(w,h)
+
+                }
+                this.el.matrix(this.parameters.transform).transform({y:snap[1]},true).size(this.parameters.box.width + snap[0], this.parameters.box.height + snap[1]);
+
+              }else{
+                this.el.move(this.parameters.box.x, this.parameters.box.y + snap[1]).size(this.parameters.box.width + snap[0], this.parameters.box.height - snap[1]);
+              }
+
             }
           };
           break;
@@ -191,7 +250,25 @@
                 return;
               }
 
-              this.el.move(this.parameters.box.x, this.parameters.box.y).size(this.parameters.box.width + snap[0], this.parameters.box.height + snap[1]);
+              if(this.parameters.type === "g"){
+                var multipleW=snap[0]/this.parameters.box.width;
+                var multipleH=snap[1]/this.parameters.box.height;
+                var childArr=this.el.children()
+                for(let i=0;i<childArr.length;i++){
+                  let ax=this.parameters.childBox[i].x+(multipleW*this.parameters.abbox[i].ax)
+                  let ay=this.parameters.childBox[i].y+(multipleH*this.parameters.abbox[i].ay)
+                  let w=this.parameters.childBox[i].width*(1+multipleW)
+                  let h=this.parameters.childBox[i].height*(1+multipleH)
+
+                  childArr[i].move(ax,ay).size(w,h)
+
+                }
+                this.el.size(this.parameters.box.width + snap[0], this.parameters.box.height + snap[1]);
+
+              }else{
+                this.el.move(this.parameters.box.x, this.parameters.box.y).size(this.parameters.box.width + snap[0], this.parameters.box.height + snap[1]);
+              }
+
             }
           };
           break;
@@ -208,7 +285,24 @@
                 return;
               }
 
-              this.el.move(this.parameters.box.x + snap[0], this.parameters.box.y).size(this.parameters.box.width - snap[0], this.parameters.box.height + snap[1]);
+              if(this.parameters.type === "g"){
+                var multipleW=snap[0]/this.parameters.box.width;
+                var multipleH=snap[1]/this.parameters.box.height;
+                var childArr=this.el.children()
+                for(let i=0;i<childArr.length;i++){
+                  let ax=this.parameters.childBox[i].x-(multipleW*this.parameters.abbox[i].ax)
+                  let ay=this.parameters.childBox[i].y+(multipleH*this.parameters.abbox[i].ay)
+                  let w=this.parameters.childBox[i].width*(1-multipleW)
+                  let h=this.parameters.childBox[i].height*(1+multipleH)
+                  // console.log(ax,ay,w,h)
+                  childArr[i].move(ax,ay).size(w,h)
+                }
+                this.el.matrix(this.parameters.transform).transform({x:snap[0]},true).size(this.parameters.box.width - snap[0], this.parameters.box.height - snap[1]);
+
+              }else{
+                this.el.move(this.parameters.box.x + snap[0], this.parameters.box.y).size(this.parameters.box.width - snap[0], this.parameters.box.height + snap[1]);
+              }
+
             }
           };
           break;
@@ -224,7 +318,22 @@
                 return;
               }
 
-              this.el.move(this.parameters.box.x, this.parameters.box.y + snap[1]).height(this.parameters.box.height - snap[1]);
+              if(this.parameters.type === "g"){
+                var multipleH=snap[1]/this.parameters.box.height;
+
+                var childArr=this.el.children()
+                for(let i=0;i<childArr.length;i++){
+                  let ay=this.parameters.childBox[i].y-(multipleH*this.parameters.abbox[i].ay)
+                  
+                  childArr[i].move(this.parameters.childBox[i].x,ay).height(this.parameters.childBox[i].height*(1-multipleH))
+                }
+                
+                this.el.matrix(this.parameters.transform).transform({y:snap[1]},true).height(this.parameters.box.height - snap[1])
+              }else{
+                this.el.move(this.parameters.box.x, this.parameters.box.y + snap[1]).height(this.parameters.box.height - snap[1]);
+              }
+
+
             }
           };
           break;
@@ -235,11 +344,24 @@
           this.calc = function (diffX, diffY) {
             var snap = this.snapToGrid(diffX, diffY, 0);
             if (this.parameters.box.width + snap[0] > 0) {
+              
               if (this.parameters.type === "text") {
                 return;
               }
 
-              this.el.move(this.parameters.box.x, this.parameters.box.y).width(this.parameters.box.width + snap[0]);
+              if(this.parameters.type === "g"){
+                var multipleW=snap[0]/this.parameters.box.width;
+                
+                var childArr=this.el.children()
+                for(let i=0;i<childArr.length;i++){
+                  let ax=this.parameters.childBox[i].x+(multipleW*this.parameters.abbox[i].ax)
+                  childArr[i].move(ax,this.parameters.childBox[i].y).width(this.parameters.childBox[i].width*(1+multipleW))
+                }
+                this.el.width(this.parameters.box.width + snap[0])
+              }else{
+                this.el.move(this.parameters.box.x, this.parameters.box.y).width(this.parameters.box.width + snap[0]);
+              }
+
             }
           };
           break;
@@ -254,25 +376,53 @@
                 return;
               }
 
-              this.el.move(this.parameters.box.x, this.parameters.box.y).height(this.parameters.box.height + snap[1]);
+              if(this.parameters.type === "g"){
+                var multipleH=snap[1]/this.parameters.box.height;
+
+                // console.log(snap[1])
+                var childArr=this.el.children()
+                for(let i=0;i<childArr.length;i++){
+                  let ay=this.parameters.childBox[i].y+(multipleH*this.parameters.abbox[i].ay)
+
+                  childArr[i].move(this.parameters.childBox[i].x,ay).height(this.parameters.childBox[i].height*(1+multipleH))
+                }
+                this.el.height(this.parameters.box.height + snap[1])
+              }else{
+                this.el.move(this.parameters.box.x, this.parameters.box.y).height(this.parameters.box.height + snap[1]);
+              }
+
             }
           };
           break;
 
-          // Left
-          case 'l':
-            // s.a.
-            this.calc = function (diffX, diffY) {
-              var snap = this.snapToGrid(diffX, diffY, 1);
-              if (this.parameters.box.width - snap[0] > 0) {
-                if (this.parameters.type === "text") {
-                  return;
-                }
+        // Left
+        case 'l':
+          // s.a.
+          this.calc = function (diffX, diffY) {
+            var snap = this.snapToGrid(diffX, diffY, 1);
+            if (this.parameters.box.width - snap[0] > 0) {
+              if (this.parameters.type === "text") {
+                return;
+              }
 
+              if(this.parameters.type === "g"){
+                var multipleW=snap[0]/this.parameters.box.width;
+                // console.log(snap[0])
+                var childArr=this.el.children()
+                for(let i=0;i<childArr.length;i++){
+                  let ax=this.parameters.childBox[i].x-(multipleW*this.parameters.abbox[i].ax)
+
+                  childArr[i].move(ax,this.parameters.childBox[i].y).width(this.parameters.childBox[i].width*(1-multipleW))
+                }
+                
+                this.el.matrix(this.parameters.transform).transform({x:snap[0]},true).width(this.parameters.box.width - snap[0])
+              }else{
                 this.el.move(this.parameters.box.x + snap[0], this.parameters.box.y).width(this.parameters.box.width - snap[0]);
               }
-            };
-            break;
+
+            }
+          };
+          break;
 
           // Rotation
           case 'rot':
@@ -299,41 +449,42 @@
 
         // Moving one single Point (needed when an element is deepSelected which means you can move every single point of the object)
         case 'point':
-        this.calc = function (diffX, diffY) {
+          //
+          this.calc = function (diffX, diffY) {
 
-          // Snapping the point to the grid
-          var snap = this.snapToGrid(diffX, diffY, this.parameters.pointCoords[0], this.parameters.pointCoords[1]);
+            // Snapping the point to the grid
+            var snap = this.snapToGrid(diffX, diffY, this.parameters.pointCoords[0], this.parameters.pointCoords[1]);
 
-          // Get the point array
-          var array = this.el.array().valueOf();
+            // Get the point array
+            var array = this.el.array().valueOf();
 
-          // Changing the moved point in the array
-          array[this.parameters.i][0] = this.parameters.pointCoords[0] + snap[0];
-          array[this.parameters.i][1] = this.parameters.pointCoords[1] + snap[1];
+            // Changing the moved point in the array
+            array[this.parameters.i][0] = this.parameters.pointCoords[0] + snap[0];
+            array[this.parameters.i][1] = this.parameters.pointCoords[1] + snap[1];
 
-          // And plot the new this.el
-          this.el.plot(array);
-        };
+            // And plot the new this.el
+            this.el.plot(array);
+          };
       }
 
       this.el.fire('resizestart', {dx: this.parameters.x, dy: this.parameters.y, event: event});
-        // When resizing started, we have to register events for...
-        // Touches.
-        SVG.on(window, 'touchmove.resize', function(e) {
-          _this.update(e || window.event);
-        });
-        SVG.on(window, 'touchend.resize', function() {
-          _this.done();
-        });
-        // Mouse.
-        SVG.on(window, 'mousemove.resize', function (e) {
-          _this.update(e || window.event);
-        });
-        SVG.on(window, 'mouseup.resize', function () {
-          _this.done();
-        });
+      // When resizing started, we have to register events for...
+      // Touches.
+      SVG.on(window, 'touchmove.resize', function(e) {
+        _this.update(e || window.event);
+      });
+      SVG.on(window, 'touchend.resize', function() {
+        _this.done();
+      });
+      // Mouse.
+      SVG.on(window, 'mousemove.resize', function (e) {
+        _this.update(e || window.event);
+      });
+      SVG.on(window, 'mouseup.resize', function () {
+        _this.done();
+      });
 
-      };
+    };
 
     // The update-function redraws the element every time the mouse is moving
     ResizeHandler.prototype.update = function (event) {
@@ -344,6 +495,7 @@
         }
         return;
       }
+
 
       // Calculate the difference between the mouseposition at start and now
       var txPt = this._extractPosition(event);

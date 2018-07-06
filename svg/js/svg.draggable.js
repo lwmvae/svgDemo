@@ -69,6 +69,8 @@
     var box = this.getBBox()
     
     var anchorOffset;
+
+    var gbox=[];
     
     // fix text-anchor in text-element (#37)
     if(this.el instanceof SVG.Text){
@@ -83,13 +85,21 @@
           break;
       }
     }
+
+    if(this.el instanceof SVG.G){
+      this.el.each(function(){
+        gbox.push(this.bbox())
+      })
+    }
     
     this.startPoints = {
       // We take absolute coordinates since we are just using a delta here
       point: this.transformPoint(e, anchorOffset),
       box:   box,
-      transform: this.el.transform()
+      transform: this.el.transform(),
+      gbox: gbox
     }
+    // console.log(this.el.transform())
     
     // add drag and end events to window
     SVG.on(window, 'mousemove.drag', function(e){ _this.drag(e) })
@@ -117,6 +127,7 @@
       , c   = this.constraint
       , gx  = p.x - this.startPoints.point.x
       , gy  = p.y - this.startPoints.point.y
+      , gbox= this.startPoints.gbox
       
     var event = new CustomEvent('dragmove', {
         detail: {
@@ -129,12 +140,13 @@
     })
       
     this.el.fire(event)
+
     
     if(event.defaultPrevented) return p
 
+
     // move the element to its new position, if possible by constraint
     if (typeof c == 'function') {
-
       var coord = c.call(this.el, x, y, this.m)
 
       // bool, just show us if movement is allowed or not
@@ -170,10 +182,16 @@
       else if (c.maxY != null && y > c.maxY - box.height)
         y = c.maxY - box.height
         
-      if(this.el instanceof SVG.G)
+      if(this.el instanceof SVG.G){
+        // console.log(gbox)
         this.el.matrix(this.startPoints.transform).transform({x:gx, y: gy}, true)
-      else
+        // this.el.each(function(index){
+          // this.move(gbox[index].x+gx, gbox[index].y+gy)
+          // console.log(this)
+        // })
+      }else{
         this.el.move(x, y)
+      }
     }
     
     // so we can use it in the end-method, too
