@@ -58,7 +58,6 @@
           this.options[i] = options[i];
         }
       }
-      // console.log(this.options)
 
       // We listen to all these events which are specifying different edges
       this.el.on('lt.resize', function(e){ _this.resize(e || window.event); });  // Left-Top
@@ -424,10 +423,10 @@
           };
           break;
 
-          // Rotation
-          case 'rot':
-            // s.a.
-            this.calc = function (diffX, diffY) {
+        // Rotation
+        case 'rot':
+          // s.a.
+          this.calc = function (diffX, diffY) {
 
             // yes this is kinda stupid but we need the mouse coords back...
             var current = {x: diffX + this.parameters.p.x, y: diffY + this.parameters.p.y};
@@ -443,7 +442,13 @@
             // We have to move the element to the center of the box first and change the rotation afterwards
             // because rotation always works around a rotation-center, which is changed when moving the element
             // We also set the new rotation center to the center of the box.
-            this.el.center(this.parameters.box.cx, this.parameters.box.cy).rotate(this.parameters.rotation + angle - angle % this.options.snapToAngle, this.parameters.box.cx, this.parameters.box.cy);
+
+            if(this.parameters.type === "g"){
+              this.el.matrix(this.parameters.transform).rotate(this.parameters.rotation + angle - angle % this.options.snapToAngle, this.parameters.box.cx, this.parameters.box.cy);
+            }else{
+              this.el.center(this.parameters.box.cx, this.parameters.box.cy).rotate(this.parameters.rotation + angle - angle % this.options.snapToAngle, this.parameters.box.cx, this.parameters.box.cy);
+            }
+            
           };
           break;
 
@@ -452,19 +457,19 @@
           //
           this.calc = function (diffX, diffY) {
 
-            // Snapping the point to the grid
-            var snap = this.snapToGrid(diffX, diffY, this.parameters.pointCoords[0], this.parameters.pointCoords[1]);
+          // Snapping the point to the grid
+          var snap = this.snapToGrid(diffX, diffY, this.parameters.pointCoords[0], this.parameters.pointCoords[1]);
 
-            // Get the point array
-            var array = this.el.array().valueOf();
+          // Get the point array
+          var array = this.el.array().valueOf();
 
-            // Changing the moved point in the array
-            array[this.parameters.i][0] = this.parameters.pointCoords[0] + snap[0];
-            array[this.parameters.i][1] = this.parameters.pointCoords[1] + snap[1];
+          // Changing the moved point in the array
+          array[this.parameters.i][0] = this.parameters.pointCoords[0] + snap[0];
+          array[this.parameters.i][1] = this.parameters.pointCoords[1] + snap[1];
 
-            // And plot the new this.el
-            this.el.plot(array);
-          };
+          // And plot the new this.el
+          this.el.plot(array);
+        };
       }
 
       this.el.fire('resizestart', {dx: this.parameters.x, dy: this.parameters.y, event: event});

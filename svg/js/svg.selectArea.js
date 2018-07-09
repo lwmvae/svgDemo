@@ -8,30 +8,39 @@
  		el.remember('_selectArea',this);
  		this.el=el
 
- 		this.drawDashArea=undefined
+ 		this.drawDashArea=undefined;
  		// 是否有选中的图形
  		this.activeShapes=false;
+
+ 		this.shapesArr=[];
+ 		this.preArr=[];
  		
  		this.OFFSETLEFT=this.el.parent().offsetLeft;
  		this.OFFSETTOP=this.el.parent().offsetTop;
  		
  		//记录鼠标开始和结束的坐标
  		this.points={};
+
+ 		//记录preGroup
+ 		this.preGroup=undefined;
+ 		this.ppreGroup=undefined;
+
  	}
 
  	SelectAreaHandler.prototype.init=function(val){
  		var _this=this;
  		
+ 		this.stop();
+
  		if(val){
  			return;
  		}
 
- 		this.el.on('mousedown',function(e){ _this.down(e) })
- 
- 		// this.el.on('mouseup',function(e){ _this.move(e) })
-
- 		window.addEventListener('mouseup',function(e){ _this.up(e) },false)
- 	
+ 		this.el.on('mousedown',function(e){ _this.down(e) });
+ 		// this.el.on('mousemove',function(e){ _this.move(e) });
+ 		this.el.on('mouseup',function(e){ _this.up(e) });
+ 		window.addEventListener('mouseup',function(e){ _this.windowUp(e) });
+ 		return this.shapesArr
  	}
  	SelectAreaHandler.prototype.down=function(e){
  		//鼠标左键点击
@@ -41,17 +50,27 @@
  					this.selectize(false).resize(false).draggable(false);
  				}
  			})
- 			// console.log(e.target.instance.parent().type=='g')
+ 			// console.log(this.activeShapes)
 
  			if(e.target.instance!=this.el){
  				this.activeShapes=true;
  				if(e.target.instance.parent().type=='g'){
 	 				e.target.instance.parent().selectize().resize().draggable();
  				}else{
+ 					// console.log(e.target)
+ 					if(this.preGroup){
+ 						this.cancelGroup()
+ 						// this.preGroup.ungroup()
+ 					}
 	 				e.target.instance.selectize().resize().draggable();
  				}
  			}else{
  				this.activeShapes=false;
+ 				if(this.preGroup){
+ 						this.cancelGroup()
+
+ 					// this.preGroup.ungroup()
+ 				}
  			}
  			
  			
@@ -67,11 +86,11 @@
  			this.drawDashArea.draw(e).fill('rgba(6,117,234,0.3)')
  		}
  	}
- 	SelectAreaHandler.prototype.move=function(e){
+ 	// SelectAreaHandler.prototype.move=function(e){
 
- 	}
+ 	// }
  	SelectAreaHandler.prototype.up=function(e){
- 			// console.log(this.activeShapes)
+ 		// console.log(this.activeShapes)
  		if(!this.activeShapes){
  			
  			this.drawDashArea.draw('stop',e);
@@ -81,16 +100,73 @@
 			this.points.y2=e.pageY-this.OFFSETTOP;
 
 			var containArr=this.cacl(this.el.children());
+			this.shapesArr=containArr;
 			this.selectShapes(containArr)
+			
 		}
  	}
+ 	SelectAreaHandler.prototype.windowUp=function(e){
+		if(this.drawDashArea){
+			this.drawDashArea.remove();
+		}
+ 	}
+ 	SelectAreaHandler.prototype.stop=function(){
+ 		this.el.off('mousedown');
+ 		this.el.off('mousemove');
+ 		this.el.off('mouseup');
+
+ 		return this;
+ 	}
+ 	
  	//选中鼠标划过区域所有的节点
  	SelectAreaHandler.prototype.selectShapes=function(arr){
+ 		// console.log(arr)
  		if(arr.length==0){
  			return;
- 		}else{
- 			console.log(arr)
+ 		}else if(arr.length==1){
+ 			arr[0].selectize().resize().draggable();
+ 		}else if(arr.length>1){
+			this.tempGroup(arr)
+ 			return arr;
  		}
+ 	}
+ 	SelectAreaHandler.prototype.tempGroup=function(arr){
+ 		let hasGroup=false;
+ 		let groupEle=undefined;
+ 		let _this=this;
+ 		arr.forEach(function(e,index){
+ 			if(e.type==='g'){
+ 				groupEle=e;
+ 				_this.ppreGroup=e;
+ 				hasGroup=true;
+ 				arr.splice(index,1)
+ 			}
+ 		})
+ 		console.log(this.ppreGroup)
+ 		if(this.ppreGroup){
+ 			this.preArr=arr;
+ 			
+ 		}
+
+ 		if(!groupEle){
+ 			groupEle=this.el.group();
+ 		}
+ 		
+ 		arr.forEach(function(e){
+ 			groupEle.add(e)
+ 		})
+ 		groupEle.selectize().resize().draggable();
+ 		this.preGroup=groupEle
+ 		this.activeShapes=true
+ 	}
+ 	SelectAreaHandler.prototype.cancelGroup=function(){
+ 		
+ 	}
+ 	SelectAreaHandler.prototype.setGroup=function(){
+ 		this.preGroup=undefined
+ 	}
+ 	SelectAreaHandler.prototype.setUngroup=function(){
+
  	}
  	SelectAreaHandler.prototype.getPoints=function(arr){
  		var group=this.el.group();
@@ -98,7 +174,7 @@
  			group.add(arr[i])
  		}
  		var points=group.bbox();
- 		// group.remove()
+ 		
  		return points;
  	}
  	//返回适用于函数isInPolygon的数组
@@ -210,6 +286,7 @@
  	SVG.extend(SVG.Element, {
 
  		selectArea:function(val){
+ 			var val=val || false;
  			if(val){
  				return;
  			}
@@ -218,7 +295,8 @@
 
  			selectAreaHandler.init(val)
 			// console.log(this)
-			return this;
+			// return this;
+			return selectAreaHandler.init(val);
 
 		}
 	})

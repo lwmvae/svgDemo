@@ -42,6 +42,8 @@
 
 svg * {
   cursor: move;
+  stroke: #999;
+  stroke-width: 1;
 }
 
 .svg_select_boundingRect {

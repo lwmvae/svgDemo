@@ -16,6 +16,10 @@
 	<link rel="stylesheet" type="text/css" href="../js/svg.select.css">
 </head>
 <body>
+	<div id="btn">
+		<button id="group">合并元件</button>
+		<button id="ungroup">拆分元件</button>
+	</div>
 	<div id="myDrawing"></div>
 </body>
 <script type="text/javascript" src="../js/svg.js"></script>
@@ -23,7 +27,7 @@
 <script type="text/javascript" src="../js/svg.select.js"></script>
 <script type="text/javascript" src="../js/svg.resize.js"></script>
 <script type="text/javascript" src="../js/svg.draggable.js"></script>
-<script type="text/javascript" src="../js/svg.selectShapes.js"></script>
+<!-- <script type="text/javascript" src="../js/svg.selectShapes.js"></script> -->
 <script type="text/javascript" src="../js/svg.selectArea.js"></script>
 
 <script type="text/javascript">
@@ -35,23 +39,21 @@
 	var circle1 = draw.rect(50,50).move(400, 50).fill('#999');
 	// var circle2 = draw.rect(50,50).move(425, 100).fill('#999');
 
-	var group=draw.group();
-	group.add(rect1);
-	group.add(circle1);
-	// group.add(circle2);
-	// console.log(group.bbox())
-	// console.log(circle.bbox())
-	// var point=group.bbox()
-	// var rect2=draw.rect(point.w,point.h).move(point.x,point.y).fill('rgba(255,255,255,0)')
-
-	// var nested = draw.group()
-	// var rect3 = nested.rect(200, 200)
-	// var circle3=nested.circle(50).move(200,200)
-	// nested.selectize().resize().draggable()
-// console.log(rect.bbox())	
-
-
 
 draw.selectArea(false)
+
+function $(id){
+	return document.getElementById(id);
+}
+
+$('group').addEventListener('click',function(){
+	console.log(draw.selectArea())
+	// draw.selectArea(false).setGroup();
+})
+
+$('ungroup').addEventListener('click',function(){
+	console.log('ungroup');
+})
+
 </script>
 </html>
