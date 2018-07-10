@@ -27,8 +27,8 @@
 <script type="text/javascript" src="../js/svg.select.js"></script>
 <script type="text/javascript" src="../js/svg.resize.js"></script>
 <script type="text/javascript" src="../js/svg.draggable.js"></script>
-<!-- <script type="text/javascript" src="../js/svg.selectShapes.js"></script> -->
-<script type="text/javascript" src="../js/svg.selectArea.js"></script>
+<!-- <script type="text/javascript" src="../js/svg.selectArea01.js"></script> -->
+<script type="text/javascript" src="../js/svg.selectArea02.js"></script>
 
 <script type="text/javascript">
 	var draw = SVG('myDrawing').size(1300, 800);
@@ -47,12 +47,12 @@ function $(id){
 }
 
 $('group').addEventListener('click',function(){
-	console.log(draw.selectArea())
-	// draw.selectArea(false).setGroup();
+	// console.log(draw.selectArea())
+	draw.selectArea(false).setGroup();
 })
 
 $('ungroup').addEventListener('click',function(){
-	console.log('ungroup');
+	draw.selectArea(false).setUngroup();
 })
 
 </script>

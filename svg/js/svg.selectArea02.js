@@ -13,7 +13,7 @@
  		this.activeShapes=false;
 
  		this.shapesArr=[];
- 		this.preArr=[];
+ 		
  		
  		this.OFFSETLEFT=this.el.parent().offsetLeft;
  		this.OFFSETTOP=this.el.parent().offsetTop;
@@ -23,7 +23,9 @@
 
  		//记录preGroup
  		this.preGroup=undefined;
- 		this.ppreGroup=undefined;
+
+ 		//记录点击时的顶层元素
+ 		this.gTop=undefined;
 
  	}
 
@@ -51,26 +53,22 @@
  				}
  			})
  			// console.log(this.activeShapes)
-
+			
  			if(e.target.instance!=this.el){
  				this.activeShapes=true;
  				if(e.target.instance.parent().type=='g'){
+ 					this.gTop=e.target.instance.parent()
 	 				e.target.instance.parent().selectize().resize().draggable();
- 				}else{
- 					// console.log(e.target)
- 					if(this.preGroup){
- 						this.cancelGroup()
- 						// this.preGroup.ungroup()
- 					}
+ 				}else{ 					
+ 					this.cancelGroup()
+ 					
 	 				e.target.instance.selectize().resize().draggable();
  				}
  			}else{
  				this.activeShapes=false;
- 				if(this.preGroup){
- 						this.cancelGroup()
-
- 					// this.preGroup.ungroup()
- 				}
+ 				
+ 				this.cancelGroup()
+ 				
  			}
  			
  			
@@ -131,42 +129,37 @@
  		}
  	}
  	SelectAreaHandler.prototype.tempGroup=function(arr){
- 		let hasGroup=false;
- 		let groupEle=undefined;
- 		let _this=this;
- 		arr.forEach(function(e,index){
+ 		let groupEle=this.el.group();
+
+ 		arr.forEach(function(e){
  			if(e.type==='g'){
- 				groupEle=e;
- 				_this.ppreGroup=e;
- 				hasGroup=true;
- 				arr.splice(index,1)
+ 				e.each(function(){
+ 					groupEle.add(this)
+ 				})
+ 				e.remove()
+ 			}else{
+ 				groupEle.add(e)
  			}
  		})
- 		console.log(this.ppreGroup)
- 		if(this.ppreGroup){
- 			this.preArr=arr;
- 			
- 		}
 
- 		if(!groupEle){
- 			groupEle=this.el.group();
- 		}
- 		
- 		arr.forEach(function(e){
- 			groupEle.add(e)
- 		})
  		groupEle.selectize().resize().draggable();
  		this.preGroup=groupEle
  		this.activeShapes=true
  	}
  	SelectAreaHandler.prototype.cancelGroup=function(){
- 		
+ 		if(this.preGroup){
+	 		this.preGroup.ungroup()
+ 		}
  	}
  	SelectAreaHandler.prototype.setGroup=function(){
  		this.preGroup=undefined
  	}
  	SelectAreaHandler.prototype.setUngroup=function(){
-
+ 		console.log(this.gTop)
+ 		if(this.gTop){
+ 			this.gTop.selectize(false).resize(false).draggable(false);
+	 		this.gTop.ungroup()
+ 		}
  	}
  	SelectAreaHandler.prototype.getPoints=function(arr){
  		var group=this.el.group();
@@ -296,7 +289,7 @@
  			selectAreaHandler.init(val)
 			// console.log(this)
 			// return this;
-			return selectAreaHandler.init(val);
+			return selectAreaHandler;
 
 		}
 	})
