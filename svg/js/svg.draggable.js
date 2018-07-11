@@ -183,12 +183,13 @@
         y = c.maxY - box.height
         
       if(this.el instanceof SVG.G){
-        // console.log(gbox)
-        this.el.matrix(this.startPoints.transform).transform({x:gx, y: gy}, true)
-        // this.el.each(function(index){
-          // this.move(gbox[index].x+gx, gbox[index].y+gy)
+        
+        this.el.matrix(this.startPoints.transform)
+        // this.el.matrix(this.startPoints.transform).transform({x:gx, y: gy}, true)
+        this.el.each(function(index){
+          this.move(gbox[index].x+gx, gbox[index].y+gy)
           // console.log(this)
-        // })
+        })
       }else{
         this.el.move(x, y)
       }
