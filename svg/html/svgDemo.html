@@ -19,13 +19,18 @@
 	<div id="btn">
 		<button id="group">合并元件</button>
 		<button id="ungroup">拆分元件</button>
+		<p contenteditable='true'>
+			<span>123</span>
+		</p>
 	</div>
 	<div id="myDrawing"></div>
 </body>
-<script type="text/javascript" src="../js/svg.js"></script>
+<!-- <script type="text/javascript" src="../js/svg.js"></script> -->
+<script type="text/javascript" src="../js/svg01.js"></script>
 <script type="text/javascript" src="../js/svg.draw.js"></script>
 <script type="text/javascript" src="../js/svg.select.js"></script>
-<script type="text/javascript" src="../js/svg.resize.js"></script>
+<!-- <script type="text/javascript" src="../js/svg.resize.js"></script> -->
+<script type="text/javascript" src="../js/svg.resize01.js"></script>
 <script type="text/javascript" src="../js/svg.draggable.js"></script>
 <!-- <script type="text/javascript" src="../js/svg.selectArea01.js"></script> -->
 <!-- <script type="text/javascript" src="../js/svg.selectArea02.js"></script> -->
@@ -35,9 +40,10 @@
 	var draw = SVG('myDrawing').size(1300, 800);
 	var rect = draw.rect(100,100).move(100, 50).fill('#dfdfdf');
 	var circle = draw.circle(100).move(250, 150).fill('#999');
+	var text = draw.text('Hello World').move(400,100).font({size:80});
 	// var polygon = draw.polygon('50,10 60,40 80,50 60,60 50,100 40,60 60,50 100,40').fill('#f06').move(20, 20)
-	var rect1 = draw.rect(50,50).move(450, 150).fill('#dfdfdf');
-	var circle1 = draw.rect(50,50).move(400, 50).fill('#999');
+	// var rect1 = draw.rect(50,50).move(450, 150).fill('#dfdfdf');
+	// var circle1 = draw.rect(50,50).move(400, 50).fill('#999');
 	// var circle2 = draw.rect(50,50).move(425, 100).fill('#999');
 
 // console.log(rect.bbox())
@@ -55,6 +61,7 @@ $('group').addEventListener('click',function(){
 $('ungroup').addEventListener('click',function(){
 	draw.selectArea(false).setUngroup();
 })
+
 
 </script>
 </html>

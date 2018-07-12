@@ -56,8 +56,8 @@
 			let _this=this;
  			if(e.target.instance!=this.el){
  				this.activeShapes=true;
+ 				let topEle;
  				if(e.target.instance.parent().type=='g'){
- 					let topEle;
  					e.target.instance.parents().forEach(function(ele){
  						if(ele.parent().type=='svg'){
  							topEle=ele;
@@ -65,23 +65,27 @@
  						}
  					});
  					
-	 				topEle.selectize().resize().draggable();
- 				}else{ 					
+ 				}else if(e.target.instance.parent().type=='text'){
+ 					topEle=e.target.instance.parent()
+ 				}else{ 
  					this.cancelGroup()
  					_this.gTop=undefined
-	 				e.target.instance.selectize().resize().draggable();
+ 					topEle=e.target.instance
  				}
+ 				topEle.selectize().resize().draggable();
  			}else{
  				this.activeShapes=false;
  				
  				this.cancelGroup()
  				this.preGroup=undefined
  			}
+
  			
  			
  		}else if(e.button==2){//右键点击
  			e.stopPropagation()
  		}
+ 		
 
  		if(!this.activeShapes){
  			this.points.x=e.pageX-this.OFFSETLEFT;
@@ -152,18 +156,22 @@
  			let _this=this;
  			let transform=this.preGroup.attr('transform')
 
- 			let an=this.preGroup.matrix()
- 			console.log(an)
+ 			// let an=this.preGroup.transform().rotation
+ 			// console.log(this.preGroup.bbox())
  		
  			this.preGroup.children().forEach(function(e){
- 				
- 				let t=e.transform()
+ 				// console.log(e.cx(),e.cy())
+ 				// console.log()
+ 				// e.move(e.x()+0.1,e.y()+0.1)
+ 				e.attr('transform',transform)
+ 				// console.log(e.x())
+ 				// let t=e.transform()
  				// console.log(t)
  				// e.matrix(e.transform()).attr('transform',transform)
  				// e.matrix(e.transform()).attr('transform',transform)
- 				// console.log(e.bbox().cx,e.bbox().cy)
+ 				// console.log(e.cx(),e.cy())
  				// e.rotate(e.transform().rotation+an)
- 				// e.center(e.bbox().cx,e.bbox().cy).rotate(e.transform().rotation+an,e.bbox().cx,e.bbox().cy)
+ 				// e.center(e.cx(),e.cy()).rotate(e.transform().rotation+an,e.cx(),e.cy())
  				_this.el.add(e)
  				
  			})

@@ -175,8 +175,8 @@
 
 
               if (this.parameters.type === "text") {
-                this.el.move(this.parameters.box.x + snap[0], this.parameters.box.y);
-                this.el.attr("font-size", this.parameters.fontSize - snap[0]);
+                // this.el.move(this.parameters.box.x + snap[0], this.parameters.box.y);
+                // this.el.attr("font-size", this.parameters.fontSize - snap[0]);
                 return;
               }
 
@@ -209,8 +209,8 @@
             var snap = this.snapToGrid(diffX, diffY, 1 << 1);
             if (this.parameters.box.width + snap[0] > 0 && this.parameters.box.height - snap[1] > 0) {
               if (this.parameters.type === "text") {
-                this.el.move(this.parameters.box.x - snap[0], this.parameters.box.y);
-                this.el.attr("font-size", this.parameters.fontSize + snap[0]);
+                // this.el.move(this.parameters.box.x - snap[0], this.parameters.box.y);
+                // this.el.attr("font-size", this.parameters.fontSize + snap[0]);
                 return;
               }
 
@@ -244,8 +244,8 @@
             var snap = this.snapToGrid(diffX, diffY, 0);
             if (this.parameters.box.width + snap[0] > 0 && this.parameters.box.height + snap[1] > 0) {
               if (this.parameters.type === "text") {
-                this.el.move(this.parameters.box.x - snap[0], this.parameters.box.y);
-                this.el.attr("font-size", this.parameters.fontSize + snap[0]);
+                // this.el.move(this.parameters.box.x - snap[0], this.parameters.box.y);
+                // this.el.attr("font-size", this.parameters.fontSize + snap[0]);
                 return;
               }
 
@@ -279,8 +279,8 @@
             var snap = this.snapToGrid(diffX, diffY, 1);
             if (this.parameters.box.width - snap[0] > 0 && this.parameters.box.height + snap[1] > 0) {
               if (this.parameters.type === "text") {
-                this.el.move(this.parameters.box.x + snap[0], this.parameters.box.y);
-                this.el.attr("font-size", this.parameters.fontSize - snap[0]);
+                // this.el.move(this.parameters.box.x + snap[0], this.parameters.box.y);
+                // this.el.attr("font-size", this.parameters.fontSize - snap[0]);
                 return;
               }
 
