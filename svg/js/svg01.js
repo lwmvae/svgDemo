@@ -4190,6 +4190,7 @@ SVG.Rect = SVG.invent({
   }
 })
 
+
 SVG.Circle = SVG.invent({
   // Initialize node
   create: 'circle'
@@ -4596,9 +4597,6 @@ SVG.Text = SVG.invent({
 
       return this.attr('y', typeof y.valueOf() === 'number' ? y + o : y)
     }
-    , contenteditable: function() {
-      return this.attr('contenteditable', true)
-    }
     // Move center over x-axis
     , cx: function(x) {
       return x == null ? this.bbox().cx : this.x(x - this.bbox().width / 2)
@@ -4623,7 +4621,6 @@ SVG.Text = SVG.invent({
           // add content of this node
           text += children[i].textContent
         }
-
 
         return text
       }
@@ -4791,12 +4788,11 @@ SVG.extend(SVG.Text, SVG.Tspan, {
     // clear if build mode is disabled
     if (this._build === false)
       this.clear()
-    
+
     // add new tspan
     node.appendChild(tspan.node)
-    
+
     return tspan.text(text)
-    
   }
   // Clear all lines
   , clear: function() {

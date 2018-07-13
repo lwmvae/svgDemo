@@ -65,8 +65,6 @@
  						}
  					});
  					
- 				}else if(e.target.instance.parent().type=='text'){
- 					topEle=e.target.instance.parent()
  				}else{ 
  					this.cancelGroup()
  					_this.gTop=undefined
@@ -85,7 +83,7 @@
  		}else if(e.button==2){//右键点击
  			e.stopPropagation()
  		}
- 		
+
 
  		if(!this.activeShapes){
  			this.points.x=e.pageX-this.OFFSETLEFT;
