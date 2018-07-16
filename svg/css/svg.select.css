@@ -47,7 +47,7 @@ svg * {
 }
 
 /*svg text {
-  cursor: default;
+cursor: default;
 }*/
 .svg_select_boundingRect {
   stroke-width: 1;

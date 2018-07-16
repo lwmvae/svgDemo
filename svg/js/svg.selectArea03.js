@@ -39,7 +39,7 @@
  		}
 
  		this.el.on('mousedown',function(e){ _this.down(e) });
- 		// this.el.on('mousemove',function(e){ _this.move(e) });
+ 		
  		this.el.on('mouseup',function(e){ _this.up(e) });
  		window.addEventListener('mouseup',function(e){ _this.windowUp(e) });
  		return this.shapesArr
@@ -76,14 +76,11 @@
  				
  				this.cancelGroup()
  				this.preGroup=undefined
- 			}
-
- 			
+ 			}			
  			
  		}else if(e.button==2){//右键点击
  			e.stopPropagation()
  		}
-
 
  		if(!this.activeShapes){
  			this.points.x=e.pageX-this.OFFSETLEFT;
@@ -93,9 +90,6 @@
  			this.drawDashArea.draw(e).fill('rgba(6,117,234,0.3)')
  		}
  	}
- 	// SelectAreaHandler.prototype.move=function(e){
-
- 	// }
  	SelectAreaHandler.prototype.up=function(e){
  		// console.log(this.activeShapes)
  		if(!this.activeShapes){
@@ -139,7 +133,8 @@
  	}
  	SelectAreaHandler.prototype.tempGroup=function(arr){
  		let groupEle=this.el.group();
-
+ 		groupEle.addClass('tempGroup')
+ 		
  		arr.forEach(function(e){
  			groupEle.add(e)
  		})
@@ -154,22 +149,33 @@
  			let _this=this;
  			let transform=this.preGroup.attr('transform')
 
- 			// let an=this.preGroup.transform().rotation
- 			// console.log(this.preGroup.bbox())
+ 			let an=this.preGroup.transform().rotation
+ 			// console.log(an)
  		
  			this.preGroup.children().forEach(function(e){
- 				// console.log(e.cx(),e.cy())
- 				// console.log()
- 				// e.move(e.x()+0.1,e.y()+0.1)
+ 				// console.log(e.rbox())
+ 				// console.log(e.bbox().cx,e.bbox().cy)
+ 				// console.log(e.transform().rotation)
+ 				
  				e.attr('transform',transform)
  				// console.log(e.x())
  				// let t=e.transform()
  				// console.log(t)
- 				// e.matrix(e.transform()).attr('transform',transform)
+ 				// e.matrix(e.transform()).rotate(an,e.rbox().cx,e.rbox().cy)
  				// e.matrix(e.transform()).attr('transform',transform)
  				// console.log(e.cx(),e.cy())
+ 				// let bbox=e.rbox();
  				// e.rotate(e.transform().rotation+an)
- 				// e.center(e.cx(),e.cy()).rotate(e.transform().rotation+an,e.cx(),e.cy())
+ 				// let rbox=e.rbox();
+ 				// let cx1=rbox.cx-_this.OFFSETLEFT
+ 				// let cy1=rbox.cy-_this.OFFSETTOP
+ 				// console.log(cx1,cy1)
+ 				// e.center(cx1,cy1).rotate(e.transform().rotation+an,cx1,cy1)
+ 				// e.center(e.rbox().cx,e.rbox().cy).rotate(e.transform().rotation+an)
+ 				// console.log(e.bbox())
+ 				// e.x(bbox.x)
+ 				// e.y(bbox.y)
+ 				// console.log(e)
  				_this.el.add(e)
  				
  			})
@@ -179,12 +185,14 @@
  		}
  	}
  	SelectAreaHandler.prototype.setGroup=function(){
+ 		this.preGroup.removeClass('tempGroup')
  		this.preGroup=undefined
  	}
  	SelectAreaHandler.prototype.setUngroup=function(){
  		if(this.gTop){
  			let _this=this;
  			let transform=this.gTop.attr('transform')
+ 			// this.gTop.addClass('tempGroup')
 
  			this.gTop.children().forEach(function(e){
  				e.attr('transform',transform)

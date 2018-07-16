@@ -445,6 +445,10 @@
 
             if(this.parameters.type === "g"){
               let _this=this;
+              // console.log(this.el.hasClass('tempGroup'))
+              // if(this.el.hasClass('tempGroup')){
+              //   return
+              // }
               // console.log(this.parameters.rotation + angle - angle % this.options.snapToAngle)
               this.el.matrix(this.parameters.transform).rotate(this.parameters.rotation + angle - angle % this.options.snapToAngle, this.parameters.box.cx, this.parameters.box.cy);
               // this.el.matrix(this.parameters.transform)
@@ -456,6 +460,7 @@
                 // this.center(_this.parameters.childBox[index].cx, _this.parameters.childBox[index].cy).rotate(_this.parameters.rotation + angle - angle % _this.options.snapToAngle, _this.parameters.childBox[index].cx, _this.parameters.childBox[index].cy);
                 // this.transform({rotation:_this.parameters.rotation + angle})
               })
+              // console.log(this.parameters.rotation + angle - angle % this.options.snapToAngle)
             }else{
               this.el.center(this.parameters.box.cx, this.parameters.box.cy).rotate(this.parameters.rotation + angle - angle % this.options.snapToAngle, this.parameters.box.cx, this.parameters.box.cy);
             }

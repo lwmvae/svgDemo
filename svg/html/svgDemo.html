@@ -20,7 +20,6 @@
 	<div id="btn">
 		<button id="group">合并元件</button>
 		<button id="ungroup">拆分元件</button>
-		<input type="text" value="123">
 	</div>
 	<div id="myDrawing"></div>
 </body>
@@ -38,17 +37,18 @@
 
 <script type="text/javascript">
 	var draw = SVG('myDrawing').size(1300, 800);
-	var rect = draw.rect(100,100).move(100, 50).fill('#dfdfdf');
-	var circle = draw.circle(100).move(250, 150).fill('#999');
-	var text = draw.plain('Hello World').move(400,100).font({size:80});
-	// var text1 = draw.text('Hello 123').move(400,400).font({size:80});
+	var rect = draw.rect(100,100).move(0, 0).fill('#dfdfdf');
+	var circle = draw.circle(100).move(150, 50).fill('#999');
+	// var text = draw.plain('Hello World').move(400,100).font({size:40});
 	// var polygon = draw.polygon('50,10 60,40 80,50 60,60 50,100 40,60 60,50 100,40').fill('#f06').move(20, 20)
-	// var rect1 = draw.rect(50,50).move(450, 150).fill('#dfdfdf');
-	// var circle1 = draw.rect(50,50).move(400, 50).fill('#999');
+	var rect1 = draw.rect(50,50).move(450, 150).fill('#dfdfdf');
+	var rect2 = draw.rect(50,50).move(400, 50).fill('#999');
 	// var circle2 = draw.rect(50,50).move(425, 100).fill('#999');
 
 // console.log(rect.bbox())
 draw.selectArea(false)
+
+
 
 function $(id){
 	return document.getElementById(id);
@@ -63,6 +63,6 @@ $('ungroup').addEventListener('click',function(){
 	draw.selectArea(false).setUngroup();
 })
 
-editText()
+// editText()
 </script>
 </html>
