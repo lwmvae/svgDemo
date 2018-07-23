@@ -5,6 +5,7 @@ function editText(){
 		let bbox=this.bbox();
 		//font-size
 		let size=this.font().size;
+		console.log(size)
 		//text length
 		let text_length=this.node.innerHTML.length;
 		//every text width
@@ -24,7 +25,7 @@ function editText(){
 		//listen input
 		input.oninput=function(){
 			_this.node.innerHTML=this.value
-			this.style.width=(this.value.length+1)*text_width+'px'
+			this.style.width=_this.bbox().w+text_width+'px'
 		}
 		//blur
 		input.onblur=function(){

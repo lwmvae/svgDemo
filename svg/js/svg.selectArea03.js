@@ -42,6 +42,8 @@
  		
  		this.el.on('mouseup',function(e){ _this.up(e) });
  		window.addEventListener('mouseup',function(e){ _this.windowUp(e) });
+ 		//text
+ 		this.el.on('dblclick',function(e){_this.dbl(e)})
  		return this.shapesArr
  	}
  	SelectAreaHandler.prototype.down=function(e){
@@ -53,7 +55,7 @@
  				}
  			})
  			// console.log(this.activeShapes)
-			let _this=this;
+ 			let _this=this;
  			if(e.target.instance!=this.el){
  				this.activeShapes=true;
  				let topEle;
@@ -95,30 +97,64 @@
  		if(!this.activeShapes){
  			
  			this.drawDashArea.draw('stop',e);
-			this.drawDashArea.remove();
+ 			this.drawDashArea.remove();
 
-			this.points.x2=e.pageX-this.OFFSETLEFT;
-			this.points.y2=e.pageY-this.OFFSETTOP;
+ 			this.points.x2=e.pageX-this.OFFSETLEFT;
+ 			this.points.y2=e.pageY-this.OFFSETTOP;
 
-			let containArr=this.cacl(this.el.children());
-			this.shapesArr=containArr;
-			this.selectShapes(containArr)
-			
-		}
+ 			let containArr=this.cacl(this.el.children());
+ 			this.shapesArr=containArr;
+ 			this.selectShapes(containArr)
+
+ 		}
  	}
  	SelectAreaHandler.prototype.windowUp=function(e){
-		if(this.drawDashArea){
-			this.drawDashArea.remove();
-		}
+ 		if(this.drawDashArea){
+ 			this.drawDashArea.remove();
+ 		}
  	}
- 	SelectAreaHandler.prototype.stop=function(){
- 		this.el.off('mousedown');
- 		this.el.off('mousemove');
- 		this.el.off('mouseup');
+ 	SelectAreaHandler.prototype.dbl=function(e){
+ 		let _this=e.target.instance;
+ 		if(_this.type=='text'){
+			//get points
+			let bbox=_this.bbox();
+			//font-size
+			let size=_this.font().size;
+			//text length
+			let text_length=_this.node.innerHTML.length;
+			//every text width
+			let text_width=parseInt(bbox.w/text_length);
 
- 		return this;
- 	}
- 	
+			// create nodes
+			let input=document.createElement('input');
+			input.setAttribute('type','text');
+			input.value=_this.node.innerHTML;
+			input.style.cssText=`height:${bbox.h}px;position:absolute;top:${bbox.y}px;left:${bbox.x}px;font-size:${size}px`
+			input.style.width=bbox.w+text_width+'px'
+
+			//append nodes
+			this.el.parent().appendChild(input)
+			//focus
+			input.focus()
+			//listen input
+			input.oninput=function(){
+				_this.node.innerHTML=this.value
+				this.style.width=_this.bbox().w+text_width+'px'
+			}
+			//blur
+			input.onblur=function(){
+				this.remove()
+			}
+		}
+	}
+	SelectAreaHandler.prototype.stop=function(){
+		this.el.off('mousedown');
+		this.el.off('mousemove');
+		this.el.off('mouseup');
+
+		return this;
+	}
+
  	//选中鼠标划过区域所有的节点
  	SelectAreaHandler.prototype.selectShapes=function(arr){
  		// console.log(arr)
@@ -127,7 +163,7 @@
  		}else if(arr.length==1){
  			arr[0].selectize().resize().draggable();
  		}else if(arr.length>1){
-			this.tempGroup(arr)
+ 			this.tempGroup(arr)
  			return arr;
  		}
  	}
@@ -151,10 +187,10 @@
 
  			let an=this.preGroup.transform().rotation
  			// console.log(an)
- 		
+
  			this.preGroup.children().forEach(function(e){
  				// console.log(e.rbox())
- 				// console.log(e.bbox().cx,e.bbox().cy)
+ 				// console.log(e.bbox())
  				// console.log(e.transform().rotation)
  				
  				e.attr('transform',transform)
@@ -181,7 +217,7 @@
  			})
  			this.preGroup.selectize(false).resize(false).draggable(false);
 
-	 		this.preGroup.remove()
+ 			this.preGroup.remove()
  		}
  	}
  	SelectAreaHandler.prototype.setGroup=function(){
