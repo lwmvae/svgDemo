@@ -445,7 +445,7 @@
 
             if(this.parameters.type === "g"){
               let _this=this;
-              // console.log(this.el.hasClass('tempGroup'))
+              // console.log(this.el.bbox())
               // if(this.el.hasClass('tempGroup')){
               //   return
               // }
@@ -454,10 +454,12 @@
               // this.el.matrix(this.parameters.transform)
               // this.el.rotate(this.parameters.rotation + angle - angle % this.options.snapToAngle, this.parameters.box.cx, this.parameters.box.cy);
               this.el.each(function(index){
+                // console.log(this.bbox())
                 // this.rotate(angle)
                 // this.matrix()
                 // console.log(_this.parameters.transform)
                 // this.center(_this.parameters.childBox[index].cx, _this.parameters.childBox[index].cy).rotate(_this.parameters.rotation + angle - angle % _this.options.snapToAngle, _this.parameters.childBox[index].cx, _this.parameters.childBox[index].cy);
+                // this.center(this.bbox().cx, this.bbox().cy).rotate(_this.parameters.rotation + angle - angle % _this.options.snapToAngle, this.bbox().cx, this.bbox().cy);
                 // this.transform({rotation:_this.parameters.rotation + angle})
               })
               // console.log(this.parameters.rotation + angle - angle % this.options.snapToAngle)

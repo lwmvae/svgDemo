@@ -71,6 +71,8 @@
     var anchorOffset;
 
     var gbox=[];
+
+    var getAllChildrens=[];
     
     // fix text-anchor in text-element (#37)
     if(this.el instanceof SVG.Text){
@@ -87,9 +89,19 @@
     }
 
     if(this.el instanceof SVG.G){
-      this.el.each(function(){
-        gbox.push(this.bbox())
-      })
+      let getChildren=this.el.children();
+      function getArr(arr){
+        for(let i=0;i<arr.length;i++){
+          if(arr[i].type=='g'){
+            getArr(arr[i].children())
+          }else{
+            getAllChildrens.push(arr[i])
+            gbox.push(arr[i].bbox())
+          }
+        }
+      }
+      getArr(getChildren)
+      
     }
     
     this.startPoints = {
@@ -97,7 +109,8 @@
       point: this.transformPoint(e, anchorOffset),
       box:   box,
       transform: this.el.transform(),
-      gbox: gbox
+      gbox: gbox,
+      getAllChildrens:getAllChildrens
     }
     // console.log(this.el.transform())
     
@@ -128,6 +141,7 @@
       , gx  = p.x - this.startPoints.point.x
       , gy  = p.y - this.startPoints.point.y
       , gbox= this.startPoints.gbox
+      , getAllChildrens= this.startPoints.getAllChildrens
       
     var event = new CustomEvent('dragmove', {
         detail: {
@@ -183,13 +197,13 @@
         y = c.maxY - box.height
         
       if(this.el instanceof SVG.G){
-        
         this.el.matrix(this.startPoints.transform)
         // this.el.matrix(this.startPoints.transform).transform({x:gx, y: gy}, true)
-        this.el.each(function(index){
-          this.move(gbox[index].x+gx, gbox[index].y+gy)
-          // console.log(this)
+        
+        getAllChildrens.forEach(function(e,index){
+          e.move(gbox[index].x+gx, gbox[index].y+gy)
         })
+       
       }else{
         this.el.move(x, y)
       }

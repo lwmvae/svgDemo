@@ -186,10 +186,12 @@
  			let transform=this.preGroup.attr('transform')
 
  			let an=this.preGroup.transform().rotation
- 			// console.log(an)
-
+ 			// console.log(transform)
+ 			// console.log(this.preGroup.transform())
+ 			// let bbox=this.preGroup.bbox();
  			this.preGroup.children().forEach(function(e){
  				// console.log(e.rbox())
+ 				
  				// console.log(e.bbox())
  				// console.log(e.transform().rotation)
  				
@@ -197,8 +199,11 @@
  				// console.log(e.x())
  				// let t=e.transform()
  				// console.log(t)
- 				// e.matrix(e.transform()).rotate(an,e.rbox().cx,e.rbox().cy)
- 				// e.matrix(e.transform()).attr('transform',transform)
+ 				// let cx1=e.rbox().cx-_this.OFFSETLEFT
+ 				// let cy1=e.rbox().cy-_this.OFFSETTOP
+ 				// console.log(cx1,cy1)
+ 				// e.matrix(e.transform()).rotate(an,cx1,cy1)
+ 				// e.matrix(e.attr('transform')).attr('transform',transform)
  				// console.log(e.cx(),e.cy())
  				// let bbox=e.rbox();
  				// e.rotate(e.transform().rotation+an)
@@ -214,6 +219,13 @@
  				// console.log(e)
  				_this.el.add(e)
  				
+ 			})
+ 				// console.log(this.preGroup.bbox())
+ 			
+ 			this.preGroup.each(function(){
+ 				// console.log(this.bbox())
+ 				// this.attr('transform',transform);
+ 				// _this.el.add(this)
  			})
  			this.preGroup.selectize(false).resize(false).draggable(false);
 
