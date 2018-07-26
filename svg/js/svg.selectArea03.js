@@ -190,7 +190,7 @@
  			// console.log(this.preGroup.transform())
  			// let bbox=this.preGroup.bbox();
  			this.preGroup.children().forEach(function(e){
- 				// console.log(e.rbox())
+ 				// console.log(e)
  				
  				// console.log(e.bbox())
  				// console.log(e.transform().rotation)
@@ -201,9 +201,11 @@
  				// console.log(t)
  				// let cx1=e.rbox().cx-_this.OFFSETLEFT
  				// let cy1=e.rbox().cy-_this.OFFSETTOP
- 				// console.log(cx1,cy1)
- 				// e.matrix(e.transform()).rotate(an,cx1,cy1)
- 				// e.matrix(e.attr('transform')).attr('transform',transform)
+ 				// console.log(e.transform())
+ 				// console.log(_this.preGroup.transform().matrix)
+ 				// e.matrix(e.transform()).matrix(_this.preGroup.transform())
+ 				// e.matrix(e.transform()).attr('transform',transform)
+ 				// e.matrix(transform)
  				// console.log(e.cx(),e.cy())
  				// let bbox=e.rbox();
  				// e.rotate(e.transform().rotation+an)
@@ -222,17 +224,19 @@
  			})
  				// console.log(this.preGroup.bbox())
  			
- 			this.preGroup.each(function(){
- 				// console.log(this.bbox())
- 				// this.attr('transform',transform);
- 				// _this.el.add(this)
- 			})
+ 			// this.preGroup.each(function(){
+ 			// 	this.attr('transform',transform);
+ 			// 	_this.el.add(this)
+ 			// })
  			this.preGroup.selectize(false).resize(false).draggable(false);
 
  			this.preGroup.remove()
  		}
  	}
  	SelectAreaHandler.prototype.setGroup=function(){
+ 		if(this.preGroup==undefined){
+ 			return
+ 		}
  		this.preGroup.removeClass('tempGroup')
  		this.preGroup=undefined
  	}
@@ -240,11 +244,10 @@
  		if(this.gTop){
  			let _this=this;
  			let transform=this.gTop.attr('transform')
- 			// this.gTop.addClass('tempGroup')
-
- 			this.gTop.children().forEach(function(e){
- 				e.attr('transform',transform)
- 				_this.el.add(e)
+ 			
+ 			this.gTop.each(function(){
+ 				this.attr('transform',transform)
+ 				_this.el.add(this)
  			})
 
  			this.gTop.selectize(false).resize(false).draggable(false);

@@ -452,7 +452,7 @@
               // console.log(this.parameters.rotation + angle - angle % this.options.snapToAngle)
               this.el.matrix(this.parameters.transform).rotate(this.parameters.rotation + angle - angle % this.options.snapToAngle, this.parameters.box.cx, this.parameters.box.cy);
               // this.el.matrix(this.parameters.transform)
-              // this.el.rotate(this.parameters.rotation + angle - angle % this.options.snapToAngle, this.parameters.box.cx, this.parameters.box.cy);
+              // this.el.rotate(this.parameters.rotation + angle - angle % this.options.snapToAngle);
               this.el.each(function(index){
                 // console.log(this.bbox())
                 // this.rotate(angle)
@@ -464,6 +464,8 @@
               })
               // console.log(this.parameters.rotation + angle - angle % this.options.snapToAngle)
             }else{
+              console.log(this.el.rbox())
+              // this.el.rotate(this.parameters.rotation + angle - angle % this.options.snapToAngle)
               this.el.center(this.parameters.box.cx, this.parameters.box.cy).rotate(this.parameters.rotation + angle - angle % this.options.snapToAngle, this.parameters.box.cx, this.parameters.box.cy);
             }
             
