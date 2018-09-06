@@ -2,83 +2,68 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>demo</title>
+	<title>demo01</title>
 	<style type="text/css">
-	*{
-		margin: 0;padding: 0
-	}
-	#drawing{
-		margin:50px;
-		background-color: rgba(100,100,100,0.1);
-		/*width: 1000px;height: 600px;overflow: auto;*/
-	}
-</style>
-<link rel="stylesheet" type="text/css" href="../js/svg.select.css">
+		*{
+			margin: 0;padding: 0
+		}
+		#myDrawing{
+			position: relative;
+			margin:50px;
+			background-color: rgba(100,100,100,0.1);
+		}
+	</style>
+	<link rel="stylesheet" type="text/css" href="../css/svg.select.css">
 </head>
 <body>
 	<div id="btn">
 		<button id="group">合并元件</button>
 		<button id="ungroup">拆分元件</button>
-		<p contenteditable='true'>
-			<span>123</span>
-		</p>
 	</div>
-	<div id="drawing"></div>
+	<div id="myDrawing"></div>
 </body>
-<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
-<!-- <script type="text/javascript" src="../js/svg.js"></script> -->
-<script type="text/javascript" src="../js/svg01.js"></script>
+<script type="text/javascript" src="../js/svg.js"></script>
 <script type="text/javascript" src="../js/svg.draw.js"></script>
 <script type="text/javascript" src="../js/svg.select.js"></script>
-<!-- <script type="text/javascript" src="../js/svg.resize.js"></script> -->
 <script type="text/javascript" src="../js/svg.resize01.js"></script>
 <script type="text/javascript" src="../js/svg.draggable.js"></script>
-<!-- <script type="text/javascript" src="../js/svg.selectArea01.js"></script> -->
-<!-- <script type="text/javascript" src="../js/svg.selectArea02.js"></script> -->
-<script type="text/javascript" src="../js/svg.selectArea03.js"></script>
+<script type="text/javascript" src="../js/svg.selectArea04.js"></script>
 
 <script type="text/javascript">
+	var draw = SVG('myDrawing').size(1300, 800);
+	var rect = draw.rect(100,100).move(50, 50).fill('#dfdfdf');
+	var circle = draw.circle(100).move(200, 150).fill('#999');
+	// var text1 = draw.plain('Hello World').move(500,100).font({size:40});
+	// var text2 = draw.plain('Hello').move(0,100).font({size:40});
+	// var polygon = draw.polygon('50,10 60,40 80,50 60,60 50,100 40,60 60,50 100,40').fill('#f06').move(20, 20)
+	var rect1 = draw.rect(50,50).move(450, 150).fill('#dfdfdf');
+	var rect2 = draw.rect(50,50).move(400, 50).fill('#999');
+	// var circle2 = draw.rect(50,50).move(425, 100).fill('#999');
 
-	var svgItem;
-	svgItem = {};
-	svgItem.param = {
-    rectSel:null,  //选中元素
-    draw:null
-  }
 
-  var x="1500px",y="800px";
-  $("#drawing").attr("style","width: "+x+";");
-  svgItem.param.draw = SVG('drawing').size(x, y);
+// var rect = draw.defs().rect(100, 100).fill('#f09')
+// var use  = draw.use(rect).move(200, 200)
 
-// createLine()
-//线
-function createLine(){
-	var line = svgItem.param.draw.line(10, 10, 10, 150).stroke({ width: 2 });   
-	line.draggable();
-	line.on('dblclick',function(){
-		line.selectize().resize();
-		svgItem.param.rectSel = line;
-	});
+
+// console.log(rect.bbox())
+draw.selectArea(false)
+
+
+
+function $(id){
+	return document.getElementById(id);
 }
-createText()
-//文本
-function createText(){
-	var text = svgItem.param.draw.plain('双击修改文字内容');
-	text.draggable();
-	text.on('dblclick',function(){
-		var str=prompt("请输入内容",$($(this)[0].node).text());
-		if(str){
-			if(str!=""){
-				$($(this)[0].node).text(str);
-			}else{
-				$($(this)[0].node).text("双击修改文字内容");
-			}
-		}else{
-			if(str==""){
-				$($(this)[0].node).text("双击修改文字内容");
-			}
-		}
-	});
-}
+
+$('group').addEventListener('click',function(){
+	// console.log(draw.selectArea(false).shapesArr)
+	draw.selectArea(false).setGroup();
+})
+
+$('ungroup').addEventListener('click',function(){
+	// console.log(draw.selectArea(false).shapesArr)
+	
+	draw.selectArea(false).setUngroup();
+})
+
 </script>
 </html>

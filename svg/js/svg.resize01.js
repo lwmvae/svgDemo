@@ -123,8 +123,10 @@
         var _this=this;
         this.parameters.transform=this.el.transform()
         this.parameters.childBox=[];
+        this.parameters.child=[];
         this.el.each(function(){
           _this.parameters.childBox.push(this.bbox())
+          _this.parameters.child.push(this)
         })
         this.parameters.abbox=absolute(this.parameters.box,this.parameters.childBox)
         // console.log(this.parameters.box)
@@ -449,22 +451,26 @@
               // if(this.el.hasClass('tempGroup')){
               //   return
               // }
+              // console.log(this.parameters.child)
               // console.log(this.parameters.rotation + angle - angle % this.options.snapToAngle)
               this.el.matrix(this.parameters.transform).rotate(this.parameters.rotation + angle - angle % this.options.snapToAngle, this.parameters.box.cx, this.parameters.box.cy);
               // this.el.matrix(this.parameters.transform)
               // this.el.rotate(this.parameters.rotation + angle - angle % this.options.snapToAngle);
+              // this.el.rotate(angle)
+              // console.log(angle)
               this.el.each(function(index){
                 // console.log(this.bbox())
                 // this.rotate(angle)
                 // this.matrix()
-                // console.log(_this.parameters.transform)
+                // console.log(_this.parameters.child[index].transform())
+                // this.rotate(_this.parameters.child[index].transform().rotation  - angle % _this.options.snapToAngle);
                 // this.center(_this.parameters.childBox[index].cx, _this.parameters.childBox[index].cy).rotate(_this.parameters.rotation + angle - angle % _this.options.snapToAngle, _this.parameters.childBox[index].cx, _this.parameters.childBox[index].cy);
                 // this.center(this.bbox().cx, this.bbox().cy).rotate(_this.parameters.rotation + angle - angle % _this.options.snapToAngle, this.bbox().cx, this.bbox().cy);
                 // this.transform({rotation:_this.parameters.rotation + angle})
               })
               // console.log(this.parameters.rotation + angle - angle % this.options.snapToAngle)
             }else{
-              console.log(this.el.rbox())
+              // console.log(this.el.rbox())
               // this.el.rotate(this.parameters.rotation + angle - angle % this.options.snapToAngle)
               this.el.center(this.parameters.box.cx, this.parameters.box.cy).rotate(this.parameters.rotation + angle - angle % this.options.snapToAngle, this.parameters.box.cx, this.parameters.box.cy);
             }

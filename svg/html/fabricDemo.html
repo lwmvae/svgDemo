@@ -45,7 +45,7 @@
 
 	function onChange(options) {
 		options.target.setCoords();
-		console.log(options.target)
+		// console.log(options.target)
 		canvas.forEachObject(function(obj) {
 			if (obj === options.target) return;
 			obj.set('opacity' ,options.target.intersectsWithObject(obj) ? 0.5 : 1);

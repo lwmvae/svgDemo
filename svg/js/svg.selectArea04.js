@@ -44,6 +44,7 @@
  		window.addEventListener('mouseup',function(e){ _this.windowUp(e) });
  		//text
  		this.el.on('dblclick',function(e){_this.dbl(e)})
+ 		
  		return this.shapesArr
  	}
  	SelectAreaHandler.prototype.down=function(e){
@@ -62,7 +63,7 @@
  				if(e.target.instance.parent().type=='g'){
  					this.shapesArr.length=0
  					this.shapesArr.push(e.target.instance.parent())
- 				
+ 					
  					e.target.instance.parents().forEach(function(ele){
  						if(ele.parent().type=='svg'){
  							topEle=ele;
@@ -186,14 +187,12 @@
  	SelectAreaHandler.prototype.cancelGroup=function(){
  		if(this.preGroup){
  			let _this=this;
- 			let matrix=new SVG.Matrix(_this.preGroup); 			
+ 			let transform=this.preGroup.attr('transform')
  			
- 			this.preGroup.children().forEach(function(e){
- 				//矩阵混合
- 				e.matrix(new SVG.Matrix(e).multiply(matrix))
- 				_this.el.add(e)
+ 			this.preGroup.each(function(){
+ 				this.attr('transform',transform);
+ 				_this.el.add(this)
  			})
- 			
  			this.preGroup.selectize(false).resize(false).draggable(false);
 
  			this.preGroup.remove()
@@ -209,10 +208,10 @@
  	SelectAreaHandler.prototype.setUngroup=function(){
  		if(this.gTop){
  			let _this=this;
- 			let matrix=new SVG.Matrix(_this.gTop); 
-
+ 			let transform=this.gTop.attr('transform')
+ 			
  			this.gTop.each(function(){
- 				this.matrix(new SVG.Matrix(this).multiply(matrix))
+ 				this.attr('transform',transform)
  				_this.el.add(this)
  			})
 
